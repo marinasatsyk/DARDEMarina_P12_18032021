@@ -1,6 +1,28 @@
 import logo from './logo.svg';
 import './App.css';
+// import apiDatabase from './api/API_Database.js';
+// import  PropTypes  from 'prop-types';
 
+/*
+  const apiDatabase = {
+    getUser : async (id)  => {
+      const result = await fetch("http://localhost:3000/user/"+id)
+      return result:
+    },
+    setUser : (name)  =>{
+      fetch() ...
+    }
+  }
+  export default apiDatabase;
+
+  const [users, setUsers] = useState([])
+  const setUsers(apiDatabase.getUsers())
+*/
+
+/**
+ * App
+ * @returns quedale
+ */
 function App() {
   return (
     <div className="App">
@@ -22,4 +44,7 @@ function App() {
   );
 }
 
+// App.propTypes = {
+//   name: PropTypes.string,
+// }
 export default App;
