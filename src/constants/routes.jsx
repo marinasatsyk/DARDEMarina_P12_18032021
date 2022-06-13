@@ -6,13 +6,13 @@ import Score from '../components/score';
 import Sessions from '../components/sessions';
 
 export const ROUTES_PATH = {
-    USER_MAIN_DATA: '/user/:id',
-    USER_ACTIVITY: '/user/:id/activity',
-    USER_AVERAGE_SESSIONS: '/user/:id/average-sessions',
+    USER_MAIN_DATA: `/user/${id}`,
+    USER_ACTIVITY: `/user/${id}/activity`,
+    USER_AVERAGE_SESSIONS: `/user/${id}/average-sessions`,
 
-    Score: '/user/:id/today-score',
-    Activities: '/user/:id/activities',
-    KeyData: ' /user/:id/key-data',
+    USER_SCORE: `/user/${id}/today-score`,
+    USER_ACTIVITIES: `/user/${id}/activities`,
+    USER_KEYDATA: ` /user/${id}/key-data`,
 };
 
 // USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE;
