@@ -9,18 +9,52 @@ import Score from '../score';
 import Sessions from '../sessions';
 import { Context } from '../../constants/DataContext';
 // import DataContext from '../../constants/DataContext';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
+import { Database } from '../../constants/GetData';
 //build main page, call all datas and send it to components as data
 function Main() {
     const {
         dataMain,
+        setDataMain,
         dataActiviy,
+        setDataActiviy,
         dataSessions,
+        setDataSessions,
         dataPerformance,
-        loading,
-        error,
+        setDataPerformance,
+        userId,
+        setUserId,
+        setLoading,
+        setError,
     } = useContext(Context);
 
+    const ctx = {
+        setDataMain,
+        setDataActiviy,
+        setDataSessions,
+        setDataPerformance,
+        setUserId,
+        setLoading,
+        setError,
+    };
+
+    console.log('USER IS :' + userId);
+
+    useEffect(() => {
+        async function loadData() {
+            console.log('async loadData');
+            setLoading(true);
+            await Database.getUser(userId, ctx);
+            await Database.getActivity(userId, ctx);
+            await Database.getSessions(userId, ctx);
+            await Database.getPerformance(userId, ctx);
+            setLoading(false);
+        }
+        loadData();
+    }, [userId, setLoading]);
+    console.log('dataActiviy');
+    console.log(Object.keys(dataActiviy).length);
+    console.log(dataActiviy);
     return (
         <div className="wrapper_main">
             <Header />
@@ -32,7 +66,7 @@ function Main() {
                         <div className="wrapper_charts">
                             <div className="charts">
                                 <div className="wrap_activities">
-                                    {dataActiviy ? (
+                                    {Object.keys(dataActiviy).length > 0 ? (
                                         <ActivitieS data={dataActiviy} />
                                     ) : (
                                         ''
@@ -40,14 +74,14 @@ function Main() {
                                 </div>
                                 <div className="wrap_small_charts">
                                     <div className="wrap_sessions">
-                                        {dataSessions ? (
+                                        {dataSessions.length > 0 ? (
                                             <Sessions data={dataSessions} />
                                         ) : (
                                             ''
                                         )}
                                     </div>
                                     <div className="wrap_performance">
-                                        {dataPerformance != null ? (
+                                        {dataPerformance.length > 0 ? (
                                             <PerformanceUser
                                                 data={dataPerformance}
                                             />
@@ -56,7 +90,7 @@ function Main() {
                                         )}
                                     </div>
                                     <div className="wrap_score">
-                                        {dataMain ? (
+                                        {dataMain.length > 0 ? (
                                             <Score data={dataMain} />
                                         ) : (
                                             ''
@@ -65,7 +99,7 @@ function Main() {
                                 </div>
                             </div>
                             <div className="key_data">
-                                {dataMain != null ? (
+                                {dataMain.length > 0 ? (
                                     <KeyData data={dataMain} />
                                 ) : (
                                     ''

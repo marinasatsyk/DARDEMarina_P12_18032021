@@ -5,8 +5,8 @@
 // //             <Router>
 // //                 <Switch>
 // //                     <Route path={'/user/:id'} component={<Main />} />
-// //                     <Route
-// //                         path={'/user/:id/activity'}
+// //                     <Route path='*' component={<Error />} />
+// //                     <Route path={'/user/:id/activity'}
 // //                         component={<Activity />}
 // //                     />
 // //                     <Route

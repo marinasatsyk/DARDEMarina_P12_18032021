@@ -1,19 +1,20 @@
 import React from 'react';
 import { useState, useContext, useEffect, createContext } from 'react';
-import GetData from '../GetData';
+import GetData, { Database } from '../GetData';
 // import dataBase from '../dataBase';
 
 export const Context = createContext();
 
-const DataContext = ({ children }) => {
+const DataProvider = ({ children }) => {
     console.log('Context func');
-    const [dataMain, setDataMain] = useState('');
-    const [dataActiviy, setDataActiviy] = useState('');
-    const [dataSessions, setDataSessions] = useState('');
-    const [dataPerformance, setDataPerformance] = useState('');
+    const [dataMain, setDataMain] = useState([]);
+    const [dataActiviy, setDataActiviy] = useState([]);
+    const [dataSessions, setDataSessions] = useState([]);
+    const [dataPerformance, setDataPerformance] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [userId, setUserId] = useState(12);
+    /*
     const ROUTES_PATH = {
         USER_MAIN_DATA: `http://localhost:3000/user/${userId}`,
         USER_ACTIVITY: `http://localhost:3000/user/${userId}/activity`,
@@ -27,8 +28,10 @@ const DataContext = ({ children }) => {
 
     useEffect(() => {
         async function loadData() {
-            console.log('GetAllDatas');
+            console.log('async loadData');
             setLoading(true);
+            await Database.getUser(userId, context);
+
             await GetData(
                 lsMain,
                 setDataMain,
@@ -64,10 +67,13 @@ const DataContext = ({ children }) => {
         }
         loadData();
     }, []);
+    */
 
     return (
         <Context.Provider
             value={{
+                userId,
+                setUserId,
                 dataMain,
                 setDataMain,
                 dataActiviy,
@@ -87,4 +93,4 @@ const DataContext = ({ children }) => {
     );
 };
 
-export default DataContext;
+export default DataProvider;
