@@ -3,14 +3,16 @@ import logo from '../../assets/logo.svg';
 function Header() {
     return (
         <header>
-            <div className="header">
-                <img src={logo} alt="" className="logo" />
+            <div className="wrapHeader">
+                <div className="wrap_img">
+                    <img src={logo} alt="" className="logo" />
+                </div>
                 <nav className="navHeader">
-                    <ul>
-                        <li>Accueil</li>
-                        <li>Profil</li>
-                        <li>Réglage</li>
-                        <li>Communauté</li>
+                    <ul className="menu_header">
+                        <li className="nav_item">Accueil</li>
+                        <li className="nav_item">Profil</li>
+                        <li className="nav_item">Réglage</li>
+                        <li className="nav_item">Communauté</li>
                     </ul>
                 </nav>
             </div>

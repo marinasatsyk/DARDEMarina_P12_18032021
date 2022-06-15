@@ -12,7 +12,7 @@ import ChartActivity from './chart_activity';
 function ActivitieS({ data }) {
     //change the format of day
 
-    const sessionsData = data?.data.sessions.map((item, index) => {
+    const sessionsData = data.sessions.map((item, index) => {
         item.day = index + 1;
         return item;
     });

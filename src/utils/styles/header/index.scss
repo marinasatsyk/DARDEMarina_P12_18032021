@@ -1,0 +1,26 @@
+.wrapHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: black;
+    color: white;
+    align-items: center;
+    height: 90px;
+    .wrap_img {
+        flex-grow: 1;
+    }
+}
+.navHeader {
+    flex-grow: 3;
+}
+.menu_header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 0 !important;
+
+    li {
+        list-style-type: none;
+    }
+}

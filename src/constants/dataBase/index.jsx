@@ -9,7 +9,7 @@
 //     console.log('dataBase func');
 //     const {
 //         setDataMain,
-//         setDataActiviy,
+//         setDataActivity,
 //         setDataPerformance,
 //         setDataSessions,
 //         setError,
@@ -17,7 +17,7 @@
 //     } = useContext(Context);
 
 //     const lsMain = localStorage.getItem('dataMain');
-//     const lsActvity = localStorage.getItem('dataActiviy');
+//     const lsActvity = localStorage.getItem('dataActivity');
 //     const lsSessions = localStorage.getItem('dataSessions');
 //     const lsPerformance = localStorage.getItem('dataPerformance');
 
@@ -57,9 +57,9 @@
 //     );
 //      getData(
 //         lsActvity,
-//         setDataActiviy,
+//         setDataActivity,
 //         ROUTES_PATH['USER_ACTIVITY'],
-//         'dataActiviy'
+//         'dataActivity'
 //     );
 //      getData(
 //         lsSessions,

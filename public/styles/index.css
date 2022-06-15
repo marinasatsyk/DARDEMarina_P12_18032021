@@ -1,3 +1,57 @@
+#wrapper_main {
+  min-height: 100vh;
+  max-width: 1400px;
+  margin: 0 auto;
+}
 
+.wrapper_body {
+  display: flex;
+}
+
+h1.main_page {
+  font-size: 48px;
+}
+
+.info_block {
+  width: 100%;
+}
+
+.aside {
+  background: black;
+  width: 117px;
+  height: calc(100vh - 90px);
+}
+
+.title_activity li::marker {
+  color: red !important;
+}
+
+.wrapHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: black;
+  color: white;
+  align-items: center;
+  height: 90px;
+}
+.wrapHeader .wrap_img {
+  flex-grow: 1;
+}
+
+.navHeader {
+  flex-grow: 3;
+}
+
+.menu_header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 0 !important;
+}
+.menu_header li {
+  list-style-type: none;
+}
 
 /*# sourceMappingURL=index.css.map */

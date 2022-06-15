@@ -1,23 +1,33 @@
 import axios from 'axios';
-import { useContext } from 'react';
+import { Component } from 'react';
 
 //generic func for use ls if there's otherwise axios.
-async function GetData(lsData, setFunc, url, dataName, loadFunc, errFunc) {
+async function GetData(
+    currentUser,
+    lsData,
+    setFunc,
+    url,
+    dataName,
+    loadFunc,
+    errFunc
+) {
     if (!dataName) return;
 
     console.log('GETDATA :' + dataName);
     try {
         console.log('getData func');
 
-        if (lsData) {
+        if (lsData && lsData._ID === currentUser) {
             console.log('====from LS');
             setFunc(JSON.parse(lsData));
         } else {
             const response = await axios.get(url);
-            setFunc(response.data);
-            localStorage.setItem(dataName, JSON.stringify(response.data));
+            const data = response.data;
+            data.data._ID = currentUser;
+            setFunc(data.data);
+            localStorage.setItem(dataName, JSON.stringify(data.data));
             console.log('====from axios');
-            console.log(response);
+            console.log(data.data);
         }
     } catch (error) {
         errFunc(error);
@@ -33,6 +43,7 @@ export class Database {
         //const context = useContext(pContext);
         console.log('**** ', context.setDataMain);
         return await GetData(
+            userId,
             localStorage.getItem('dataMain'),
             context.setDataMain,
             `http://localhost:3000/user/${userId}`,
@@ -44,10 +55,11 @@ export class Database {
 
     static async getActivity(userId, context) {
         return await GetData(
-            localStorage.getItem('dataActiviy'),
-            context.setDataActiviy,
+            userId,
+            localStorage.getItem('dataActivity'),
+            context.setDataActivity,
             `http://localhost:3000/user/${userId}/activity`,
-            'dataActiviy',
+            'dataActivity',
             context.setLoading,
             context.setError
         );
@@ -55,6 +67,7 @@ export class Database {
 
     static async getSessions(userId, context) {
         return await GetData(
+            userId,
             localStorage.getItem('dataSessions'),
             context.setDataSessions,
             `http://localhost:3000/user/${userId}/average-sessions`,
@@ -66,6 +79,7 @@ export class Database {
 
     static async getPerformance(userId, context) {
         return await GetData(
+            userId,
             localStorage.getItem('dataPerformance'),
             context.setDataPerformance,
             `http://localhost:3000/user/${userId}/performance`,
@@ -73,6 +87,10 @@ export class Database {
             context.setLoading,
             context.setError
         );
+    }
+
+    render() {
+        return;
     }
 }
 

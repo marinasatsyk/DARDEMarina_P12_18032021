@@ -1,8 +1,5 @@
 /**   data from    `http://localhost:3000/user/${userId}` */
-import RouterF from '../../GetAllDatas';
 import ActivitieS from '../activities';
-import Aside from '../aside';
-import Header from '../header';
 import KeyData from '../keydata';
 import PerformanceUser from '../performance';
 import Score from '../score';
@@ -11,13 +8,19 @@ import { Context } from '../../constants/DataContext';
 // import DataContext from '../../constants/DataContext';
 import { useContext, useEffect } from 'react';
 import { Database } from '../../constants/GetData';
+import { useParams } from 'react-router';
+
 //build main page, call all datas and send it to components as data
 function Main() {
+    const { id } = useParams();
+
+    console.log('USER ID :' + id);
+
     const {
         dataMain,
         setDataMain,
-        dataActiviy,
-        setDataActiviy,
+        dataActivity,
+        setDataActivity,
         dataSessions,
         setDataSessions,
         dataPerformance,
@@ -29,83 +32,90 @@ function Main() {
     } = useContext(Context);
 
     const ctx = {
+        dataMain,
         setDataMain,
-        setDataActiviy,
+        dataActivity,
+        setDataActivity,
+        dataSessions,
         setDataSessions,
+        dataPerformance,
         setDataPerformance,
+        userId,
         setUserId,
         setLoading,
         setError,
     };
-
-    console.log('USER IS :' + userId);
+    setUserId(id);
 
     useEffect(() => {
         async function loadData() {
             console.log('async loadData');
             setLoading(true);
-            await Database.getUser(userId, ctx);
-            await Database.getActivity(userId, ctx);
-            await Database.getSessions(userId, ctx);
-            await Database.getPerformance(userId, ctx);
+            await Database.getUser(id, ctx);
+            await Database.getActivity(id, ctx);
+            await Database.getSessions(id, ctx);
+            await Database.getPerformance(id, ctx);
             setLoading(false);
         }
         loadData();
-    }, [userId, setLoading]);
-    console.log('dataActiviy');
-    console.log(Object.keys(dataActiviy).length);
-    console.log(dataActiviy);
+    }, [id, setLoading]);
+
+    console.log('dataMain');
+    console.log(Object.keys(dataMain).length);
+    console.log(dataMain);
+
     return (
-        <div className="wrapper_main">
-            <Header />
-            <div className="wrapper_body">
-                <Aside />
-                <div className="info_block">
-                    <div className="greeteng">
-                        <h1>{dataMain.id}</h1>
-                        <div className="wrapper_charts">
-                            <div className="charts">
-                                <div className="wrap_activities">
-                                    {Object.keys(dataActiviy).length > 0 ? (
-                                        <ActivitieS data={dataActiviy} />
-                                    ) : (
-                                        ''
-                                    )}
-                                </div>
-                                <div className="wrap_small_charts">
-                                    <div className="wrap_sessions">
-                                        {dataSessions.length > 0 ? (
-                                            <Sessions data={dataSessions} />
-                                        ) : (
-                                            ''
-                                        )}
-                                    </div>
-                                    <div className="wrap_performance">
-                                        {dataPerformance.length > 0 ? (
-                                            <PerformanceUser
-                                                data={dataPerformance}
-                                            />
-                                        ) : (
-                                            ''
-                                        )}
-                                    </div>
-                                    <div className="wrap_score">
-                                        {dataMain.length > 0 ? (
-                                            <Score data={dataMain} />
-                                        ) : (
-                                            ''
-                                        )}
-                                    </div>
-                                </div>
+        <div className="info_block">
+            <div className="greeteng">
+                <h1 className="main_page">
+                    Bonjour {}
+                    {dataMain.hasOwnProperty('userInfos') ? (
+                        <span style={{ color: 'red' }}>
+                            {dataMain.userInfos.firstName}
+                        </span>
+                    ) : (
+                        ''
+                    )}
+                </h1>
+                <div className="wrapper_charts">
+                    <div className="charts">
+                        <div className="wrap_activities">
+                            {dataActivity.hasOwnProperty('sessions') ? (
+                                <ActivitieS data={dataActivity} />
+                            ) : (
+                                ''
+                            )}
+                        </div>
+                        <div className="wrap_small_charts">
+                            <div className="wrap_sessions">
+                                {dataSessions.hasOwnProperty('sessions') ? (
+                                    <Sessions data={dataSessions} />
+                                ) : (
+                                    ''
+                                )}
                             </div>
-                            <div className="key_data">
-                                {dataMain.length > 0 ? (
-                                    <KeyData data={dataMain} />
+                            <div className="wrap_performance">
+                                {dataPerformance.hasOwnProperty('kind') ? (
+                                    <PerformanceUser data={dataPerformance} />
+                                ) : (
+                                    ''
+                                )}
+                            </div>
+                            <div className="wrap_score">
+                                {dataMain.hasOwnProperty('todayScore') ? (
+                                    <Score data={dataMain} />
                                 ) : (
                                     ''
                                 )}
                             </div>
                         </div>
+                    </div>
+                    <div className="key_data">
+                        {dataMain.hasOwnProperty('keyData') ? (
+                            <KeyData data={dataMain} />
+                        ) : (
+                            ''
+                        )}
                     </div>
                 </div>
             </div>
