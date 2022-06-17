@@ -60,9 +60,9 @@ function Main() {
         loadData();
     }, [id, setLoading]);
 
-    console.log('dataMain');
-    console.log(Object.keys(dataMain).length);
-    console.log(dataMain);
+    // console.log('dataMain');
+    // console.log(Object.keys(dataMain).length);
+    // console.log(dataMain);
 
     return (
         <div className="info_block">

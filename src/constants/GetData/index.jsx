@@ -16,8 +16,11 @@ async function GetData(
     console.log('GETDATA :' + dataName);
     try {
         console.log('getData func');
-
-        if (lsData && lsData._ID === currentUser) {
+        // console.log('currentUser ' + currentUser);
+        // console.log('lsData ' + lsData);
+        console.log('lsData._ID ' + JSON.parse(lsData)._ID);
+        // console.log('lsData.userId ' + lsData.userId);
+        if (lsData && JSON.parse(lsData)._ID === currentUser) {
             console.log('====from LS');
             setFunc(JSON.parse(lsData));
         } else {

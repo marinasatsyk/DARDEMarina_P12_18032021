@@ -1,0 +1,44 @@
+.wrap_key_elem {
+    width: 258px;
+    height: 124px;
+    border-radius: 5px;
+    background: #fbfbfb;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    align-content: center;
+}
+
+.wrap_img_key {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    &.red {
+        background: rgba(#ff0000, 0.1);
+    }
+    &.yellow {
+        background: rgba(#f9ce23, 0.1);
+    }
+    &.blue {
+        background: rgba(#4ab8ff, 0.1);
+    }
+
+    img {
+        display: block;
+        width: 25px;
+        height: 25px;
+    }
+}
+
+.amount {
+    font-size: 20px;
+    font-weight: 700;
+}
+.unit {
+    font-size: 14px;
+    font-weight: 500;
+    color: #74798c;
+}

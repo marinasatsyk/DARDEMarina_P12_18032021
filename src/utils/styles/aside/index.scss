@@ -1,5 +1,39 @@
 .aside {
     background: black;
     width: 117px;
-    height: calc(100vh - 90px);
+    // height: calc(100vh - 90px);
+    height: 100vh;
+    position: relative;
+    .copiryght {
+        color: white;
+        transform: rotate(-0.25turn);
+        margin-left: -10%;
+        position: absolute;
+        bottom: 100px;
+        max-width: fit-content;
+        font-size: 12px;
+        width: 138px;
+        white-space: nowrap;
+    }
+}
+
+.wrap_all_img {
+    display: flex;
+    flex-direction: column;
+    // margin: calc((100vh - 90px) / 2 + (316px / 2)) auto;
+    margin: calc((50vh - 30px - 316px / 2)) calc(117px / 2 - 32px);
+    height: calc((64px * 4) + (20px * 3));
+    justify-content: space-between;
+}
+.wrap_img_aside {
+    width: 64px;
+    height: 64px;
+    background: white;
+    border-radius: 6px;
+
+    img {
+        width: 64px;
+        height: 64px;
+        object-fit: none;
+    }
 }

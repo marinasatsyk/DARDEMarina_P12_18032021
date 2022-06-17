@@ -1,6 +1,6 @@
 #wrapper_main {
   min-height: 100vh;
-  max-width: 1400px;
+  max-width: 1440px;
   margin: 0 auto;
 }
 
@@ -19,7 +19,47 @@ h1.main_page {
 .aside {
   background: black;
   width: 117px;
-  height: calc(100vh - 90px);
+  height: 100vh;
+  position: relative;
+}
+.aside .copiryght {
+  color: white;
+  transform: rotate(-0.25turn);
+  margin-left: -10%;
+  position: absolute;
+  bottom: 100px;
+  max-width: fit-content;
+  font-size: 12px;
+  width: 138px;
+  white-space: nowrap;
+}
+
+.wrap_all_img {
+  display: flex;
+  flex-direction: column;
+  margin: calc(50vh - 30px - 158px) 26.5px;
+  height: 316px;
+  justify-content: space-between;
+}
+
+.wrap_img_aside {
+  width: 64px;
+  height: 64px;
+  background: white;
+  border-radius: 6px;
+}
+.wrap_img_aside img {
+  width: 64px;
+  height: 64px;
+  object-fit: none;
+}
+
+.wrapper_charts {
+  display: flex;
+  width: calc(100% - 117px);
+  height: 615px;
+  justify-content: space-between;
+  padding: 60px;
 }
 
 .title_activity li::marker {
@@ -36,7 +76,11 @@ h1.main_page {
   height: 90px;
 }
 .wrapHeader .wrap_img {
-  flex-grow: 1;
+  margin-left: 28px;
+}
+.wrapHeader .wrap_img img {
+  width: 178px;
+  height: 60px;
 }
 
 .navHeader {
@@ -52,6 +96,57 @@ h1.main_page {
 }
 .menu_header li {
   list-style-type: none;
+}
+
+.key_data {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.wrap_key_elem {
+  width: 258px;
+  height: 124px;
+  border-radius: 5px;
+  background: #fbfbfb;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  align-content: center;
+}
+
+.wrap_img_key {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+.wrap_img_key.red {
+  background: rgba(255, 0, 0, 0.1);
+}
+.wrap_img_key.yellow {
+  background: rgba(249, 206, 35, 0.1);
+}
+.wrap_img_key.blue {
+  background: rgba(74, 184, 255, 0.1);
+}
+.wrap_img_key img {
+  display: block;
+  width: 25px;
+  height: 25px;
+}
+
+.amount {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.unit {
+  font-size: 14px;
+  font-weight: 500;
+  color: #74798c;
 }
 
 /*# sourceMappingURL=index.css.map */

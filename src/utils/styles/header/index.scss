@@ -7,7 +7,13 @@
     align-items: center;
     height: 90px;
     .wrap_img {
-        flex-grow: 1;
+        // flex-grow: 1;
+
+        margin-left: 28px;
+        img {
+            width: 178px;
+            height: 60px;
+        }
     }
 }
 .navHeader {
