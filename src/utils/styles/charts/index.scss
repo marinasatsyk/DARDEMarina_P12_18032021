@@ -5,3 +5,14 @@
     justify-content: space-between;
     padding: 60px;
 }
+
+.charts {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.wrap_small_charts {
+    display: flex;
+    justify-content: space-between;
+}

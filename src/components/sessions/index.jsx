@@ -1,4 +1,5 @@
 import React from 'react';
+import ChartSessions from './chart_sessions';
 
 /**
  * data from `http://localhost:3000/user/${userId}/average-sessions`
@@ -7,9 +8,7 @@ import React from 'react';
 function Sessions({ data }) {
     return (
         <>
-            <div>Sessions</div>
-            {console.log('=========sessions')}
-            {console.log(data)}
+            <ChartSessions data={data.sessions} />
         </>
     );
 }

@@ -1,10 +1,9 @@
-import useAxios from '../../constants/useAxios';
+import ChartPerformance from './chart_performance';
 
-/**data from `http://localhost:3000/user/${userId}/performance` */
 function PerformanceUser({ data }) {
     return (
         <>
-            <div>Activity-Performance</div>
+            <ChartPerformance data={data} />
             {console.log('=========Performance')}
             {console.log(data)}
         </>

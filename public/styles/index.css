@@ -62,8 +62,41 @@ h1.main_page {
   padding: 60px;
 }
 
+.charts {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.wrap_small_charts {
+  display: flex;
+  justify-content: space-between;
+}
+
 .title_activity li::marker {
   color: red !important;
+}
+
+.wrap_sessions {
+  width: 258px;
+  height: 263px;
+  background-color: red;
+  border-radius: 5px;
+}
+
+.wrap_performance {
+  width: 258px;
+  height: 263px;
+  border-radius: 5px;
+  border: 1px solid black;
+  background: #282d30;
+}
+
+.wrap_score {
+  width: 258px;
+  height: 263px;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 .wrapHeader {
