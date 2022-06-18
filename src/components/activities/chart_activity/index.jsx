@@ -234,13 +234,7 @@ function ChartActivity({ data }) {
                         iconSize="12"
                         content={renderLegend}
                     />
-                    {/* verticalAlign="top"
-                        // align="right"
-                        height={64}
-                        iconType="circle"
-                        iconSize="12"
-                        content={renderLegend}
-                    /> */}
+
                     <Tooltip content={<CustomTooltip />} />
 
                     <Bar
