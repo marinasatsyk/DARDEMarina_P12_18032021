@@ -5,8 +5,11 @@ import KeyElem from './key_elem';
  * @returns
  */
 function KeyData({ data }) {
-    // const keyData = data.KeyData;
-
+    console.log(data);
+    /**
+     * data key for building keyelem
+     * @type {{calorieCount: number, proteinCount:number, carbohydrateCount:number, lipidCount:number}}
+     */
     const dataKey = data.keyData;
 
     return (

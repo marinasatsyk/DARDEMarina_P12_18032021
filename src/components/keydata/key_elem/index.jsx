@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import calories from '../../../assets/energy.svg';
 import proteines from '../../../assets/chicken.svg';
 import glucides from '../../../assets/apple.svg';
@@ -86,4 +87,13 @@ function KeyElem({ data, unit }) {
     );
 }
 
+KeyElem.propTypes = {
+    data: PropTypes.shape({
+        calorieCount: PropTypes.number,
+        proteinCount: PropTypes.number,
+        carbohydrateCount: PropTypes.number,
+        lipidCount: PropTypes.number,
+    }),
+    unit: PropTypes.string,
+};
 export default KeyElem;

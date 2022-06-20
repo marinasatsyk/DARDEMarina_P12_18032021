@@ -1,13 +1,7 @@
 import { func } from 'prop-types';
 import React, { PureComponent } from 'react';
-
+import PropTypes from 'prop-types';
 import ChartActivity from './chart_activity';
-
-/**
- *
- * @param {*} param0
- * @returns
- */
 
 function ActivitieS({ data }) {
     //change the format of day
@@ -36,4 +30,7 @@ function ActivitieS({ data }) {
     );
 }
 
+ActivitieS.propTypes = {
+    data: PropTypes.object,
+};
 export default ActivitieS;

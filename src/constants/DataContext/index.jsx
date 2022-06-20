@@ -2,7 +2,11 @@ import React from 'react';
 import { useState, createContext } from 'react';
 
 export const Context = createContext();
-
+/**
+ *
+ * @param {Reactelement} param0
+ * @returns
+ */
 const DataProvider = ({ children }) => {
     const [dataMain, setDataMain] = useState([]);
     const [dataActivity, setDataActivity] = useState([]);

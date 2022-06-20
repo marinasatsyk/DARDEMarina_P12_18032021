@@ -1,4 +1,4 @@
-import { func } from 'prop-types';
+import { func, number, objectOf } from 'prop-types';
 import React, { PureComponent } from 'react';
 import {
     BarChart,
@@ -10,7 +10,7 @@ import {
     Legend,
     ResponsiveContainer,
 } from 'recharts';
-
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Container = styled.div``;
@@ -34,6 +34,9 @@ const Dot = styled.div`
 `;
 
 function ChartActivity({ data }) {
+    console.log('data ChartActivity');
+    console.log(data);
+
     const CustomTooltip = ({ active, payload }) => {
         if (active && payload && payload.length) {
             getNameOfPage(payload);
@@ -206,4 +209,8 @@ function ChartActivity({ data }) {
     );
 }
 
+// ChartActivity.prototype = {
+//     data: PropTypes.arrayOf(
+//         Object.PropTypes= number)
+// };
 export default ChartActivity;
