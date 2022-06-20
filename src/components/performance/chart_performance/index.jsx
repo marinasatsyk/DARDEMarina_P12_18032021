@@ -11,8 +11,8 @@ import {
 
 function ChartPerformance({ data }) {
     const kind_entries = Object.entries(data.kind);
-    // console.log(kind_entries);
-    //return data in format conform for radarChart
+
+    //returns data in format conform for radarChart
     const temp_data_perform = data.data.map((item) => {
         for (let i = 0; i < kind_entries.length; i++) {
             if (item.kind === i + 1) {
@@ -21,8 +21,8 @@ function ChartPerformance({ data }) {
         }
         return item;
     });
-    console.log('temp_data_perform');
-    console.log(temp_data_perform);
+
+    //reverse order and change language
     const data_perform = temp_data_perform
         .map((item) => {
             if (item.kind === 'cardio') {
@@ -47,8 +47,6 @@ function ChartPerformance({ data }) {
             return item;
         })
         .reverse();
-    console.log('*****************data_perform reverse');
-    console.log(data_perform);
 
     return (
         <>

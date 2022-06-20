@@ -4,7 +4,6 @@ import { useState, createContext } from 'react';
 export const Context = createContext();
 
 const DataProvider = ({ children }) => {
-    console.log('Context func');
     const [dataMain, setDataMain] = useState([]);
     const [dataActivity, setDataActivity] = useState([]);
     const [dataSessions, setDataSessions] = useState([]);

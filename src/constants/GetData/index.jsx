@@ -1,5 +1,9 @@
 import axios from 'axios';
 import { Component } from 'react';
+import mockDataMain from '../mockdata/USER_MAIN_DATA';
+import mockDataSessions from '../mockdata/USER_AVERAGE_SESSIONS';
+import mockDataActivity from '../mockdata/USER_ACTIVITY';
+import mockDataPerformance from '../mockdata/USER_PERFORMANCE';
 
 //generic func for use ls if there's otherwise axios.
 async function GetData(
@@ -15,11 +19,6 @@ async function GetData(
 
     console.log('GETDATA :' + dataName);
     try {
-        console.log('getData func');
-        // console.log('currentUser ' + currentUser);
-        // console.log('lsData ' + lsData);
-        console.log('lsData._ID ' + JSON.parse(lsData)._ID);
-        // console.log('lsData.userId ' + lsData.userId);
         if (lsData && JSON.parse(lsData)._ID === currentUser) {
             console.log('====from LS');
             setFunc(JSON.parse(lsData));
@@ -43,13 +42,13 @@ async function GetData(
 export class Database {
     static async getUser(userId, context) {
         console.log('->>> USER ID : ' + userId);
-        //const context = useContext(pContext);
         console.log('**** ', context.setDataMain);
         return await GetData(
             userId,
             localStorage.getItem('dataMain'),
             context.setDataMain,
             `http://localhost:3000/user/${userId}`,
+            // mockDataMain,
             'dataMain',
             context.setLoading,
             context.setError
@@ -62,6 +61,7 @@ export class Database {
             localStorage.getItem('dataActivity'),
             context.setDataActivity,
             `http://localhost:3000/user/${userId}/activity`,
+            // mockDataActivity,
             'dataActivity',
             context.setLoading,
             context.setError
@@ -74,6 +74,7 @@ export class Database {
             localStorage.getItem('dataSessions'),
             context.setDataSessions,
             `http://localhost:3000/user/${userId}/average-sessions`,
+            // mockDataSessions,
             'dataSessions',
             context.setLoading,
             context.setError
@@ -86,6 +87,7 @@ export class Database {
             localStorage.getItem('dataPerformance'),
             context.setDataPerformance,
             `http://localhost:3000/user/${userId}/performance`,
+            // mockDataPerformance,
             'dataPerformance',
             context.setLoading,
             context.setError

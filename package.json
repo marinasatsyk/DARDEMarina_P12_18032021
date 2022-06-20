@@ -22,7 +22,8 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "sass": "sass --watch src/utils/styles/index.scss public/styles/index.css"
+        "sass": "sass --watch src/utils/styles/index.scss public/styles/index.css",
+        "jsdoc": "jsdoc -c jsdoc.json"
     },
     "eslintConfig": {
         "extends": [

@@ -80,13 +80,6 @@ function ChartActivity({ data }) {
 
     const renderLegend = (props) => {
         const { payload } = props;
-
-        // const legendPayload = payload.map((item) => {
-        //     if (item.value === 'kilogram') item.value = 'Poids (kg)';
-        //     if (item.value === 'calories')
-        //         item.value = 'Calories brûlées (kCal)';
-        //     return item;
-        // });
         return (
             <div
                 className="customLegend_wrap"
@@ -131,59 +124,12 @@ function ChartActivity({ data }) {
                     </div>
                 </div>
             </div>
-
-            // <div
-            //     className="customLegend_wrap"
-            //     style={{
-            //         display: 'flex',
-            //         flexDirection: 'row',
-            //         justifyContent: 'space-between',
-            //     }}
-            // >
-            //     <div
-            //         className="title_activity"
-            //         style={{ fontSize: '15px', fontWeight: 'bold' }}
-            //     >
-            //         Activité quotidienne
-            //     </div>
-            //     <ul
-            //         style={{
-            //             display: 'flex',
-            //             flexDirection: 'row',
-            //             justifyContent: 'space-evenly',
-            //         }}
-            //     >
-            //         <Dot color="#202020" />
-            //         <Text>Poids (kg)</Text>
-            //         <Dot color="#E00000" />
-            //         <Text>Calories brulées</Text>
-            //         {legendPayload.map((entry, index) => (
-            //             <li
-            //                 key={`item-${index}`}
-            //                 style={{
-            //                     marginLeft: '32px',
-            //                     fontSize: '14px',
-            //                     color: '#74798C',
-            //                 }}
-            //             >
-            //                 <Dot color={entry.color} />
-            //                 <Text>{entry.value}</Text>
-            //                 {/* {entry.value} */}
-            //             </li>
-            //         ))}
-            //     </ul>
-            // </div>
         );
     };
 
     return (
         <Container>
-            <ResponsiveContainer
-                width="100%"
-                aspect={3}
-                // minWidth="undefined"
-                // minHeight="undefined"
-            >
+            <ResponsiveContainer width="100%" aspect={3}>
                 <BarChart
                     width={500}
                     height={300}
@@ -200,23 +146,24 @@ function ChartActivity({ data }) {
 
                     <XAxis
                         dataKey="day"
-                        stroke="#DEDEDE"
+                        stroke="#9B9EAC"
                         tick={{
-                            stroke: '#9B9EAC',
+                            // stroke: '#9B9EAC',
                             fontSize: '14px',
                             fontWeight: '300',
                         }}
                         dy={15}
                         tickLine={false}
+                        axisLine={false}
                     />
                     <YAxis yAxisId="left" orientation="left" stroke="none" />
 
                     <YAxis
                         yAxisId="right"
                         orientation="right"
-                        stroke="none"
+                        stroke="#9B9EAC"
                         tick={{
-                            stroke: '#9B9EAC',
+                            // stroke: '#9B9EAC',
                             fontSize: '14px',
                             fontWeight: '300',
                             fontStyle: 'normal',
@@ -225,6 +172,8 @@ function ChartActivity({ data }) {
                         domain={['dataMin-2', 'dataMax+2']}
                         tickCount={5}
                         dx={44}
+                        tickLine={false}
+                        axisLine={false}
                     />
 
                     <Legend

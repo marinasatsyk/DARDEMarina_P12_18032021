@@ -97,6 +97,16 @@ h1.main_page {
   height: 263px;
   border: 1px solid black;
   border-radius: 5px;
+  background: blueviolet;
+}
+
+.radialLegend {
+  text-align: center;
+  font-size: 16px;
+}
+.radialLegend .percent {
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .wrapHeader {
