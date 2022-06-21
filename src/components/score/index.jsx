@@ -19,7 +19,7 @@ import {
  */
 
 function Score({ data }) {
-    console.log('ICI SCORE!', 'font-size:25px;');
+    console.log('ICI SCORE from Score func');
     console.log(data);
     const dataScore = [];
     if (data.todayScore) {

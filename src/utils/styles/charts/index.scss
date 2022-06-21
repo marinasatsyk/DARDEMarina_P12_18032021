@@ -10,19 +10,24 @@
 
 .wrapper_charts {
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
+    @media screen and (max-width: 1290px) {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
 }
 
 .charts {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 30px;
 }
 
 .wrap_small_charts {
     display: flex;
-    justify-content: space-between;
+    gap: 30px;
 }
 
-@media screen and (max-width: 1240px) {
+@media screen and (max-width: 1290px) {
 }

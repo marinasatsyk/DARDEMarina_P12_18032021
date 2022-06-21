@@ -43,8 +43,11 @@
     }
 }
 
-.greeteng {
+.greetings {
     margin: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
 }
 
 .wrap_all_img {

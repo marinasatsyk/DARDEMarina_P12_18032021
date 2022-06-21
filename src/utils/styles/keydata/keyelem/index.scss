@@ -7,6 +7,9 @@
     align-items: center;
     justify-content: space-evenly;
     align-content: center;
+    @media screen and (max-width: 1290px) {
+        width: 200px;
+    }
 }
 
 .wrap_img_key {

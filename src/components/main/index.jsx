@@ -1,4 +1,3 @@
-/**   data from    `http://localhost:3000/user/${userId}` */
 import ActivitieS from '../activities';
 import KeyData from '../keydata';
 import PerformanceUser from '../performance';
@@ -14,7 +13,7 @@ import { Redirect, useParams } from 'react-router';
 function Main() {
     const { id } = useParams();
 
-    console.log('%cUSER ID :' + id, 'font-size:25px;');
+    console.log('%cUSER ID from main func:' + id, 'font-size:25px;');
 
     const {
         dataMain,
@@ -65,23 +64,30 @@ function Main() {
         loadData();
     }, [id, setLoading]);
 
-    // console.log('dataMain');
-    // console.log(Object.keys(dataMain).length);
     console.log('dataMain', dataMain);
 
     return (
         <div className="info_block">
-            <div className="greeteng">
-                <h1 className="main_page">
-                    Bonjour {}
-                    {dataMain.hasOwnProperty('userInfos') ? (
-                        <span style={{ color: 'red' }}>
-                            {dataMain.userInfos.firstName}
-                        </span>
-                    ) : (
-                        ''
-                    )}
-                </h1>
+            <div className="greetings">
+                <div className="wrap_greetings">
+                    <h1 className="main_page">
+                        Bonjour
+                        {dataMain.hasOwnProperty('userInfos') ? (
+                            <>
+                                <span style={{ color: 'red' }}>
+                                    {` ${dataMain.userInfos.firstName}`}
+                                </span>
+                                <br />
+                            </>
+                        ) : (
+                            ''
+                        )}
+                    </h1>
+                    <div className="goal">
+                        Félicitation ! Vous avez explosé vos objectifs hier 👏
+                    </div>
+                </div>
+
                 <div className="wrapper_charts">
                     <div className="charts">
                         <div className="wrap_activities">

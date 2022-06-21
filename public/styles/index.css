@@ -60,8 +60,11 @@ h1.main_page {
   white-space: nowrap;
 }
 
-.greeteng {
+.greetings {
   margin: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
 }
 
 .wrap_all_img {
@@ -95,18 +98,25 @@ h1.main_page {
 */
 .wrapper_charts {
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
+}
+@media screen and (max-width: 1290px) {
+  .wrapper_charts {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
 }
 
 .charts {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 30px;
 }
 
 .wrap_small_charts {
   display: flex;
-  justify-content: space-between;
+  gap: 30px;
 }
 
 .title_activity li::marker {
@@ -181,6 +191,12 @@ h1.main_page {
   flex-direction: column;
   justify-content: space-between;
 }
+@media screen and (max-width: 1290px) {
+  .key_data {
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+}
 
 .wrap_key_elem {
   width: 258px;
@@ -191,6 +207,11 @@ h1.main_page {
   align-items: center;
   justify-content: space-evenly;
   align-content: center;
+}
+@media screen and (max-width: 1290px) {
+  .wrap_key_elem {
+    width: 200px;
+  }
 }
 
 .wrap_img_key {
