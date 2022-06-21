@@ -194,7 +194,7 @@ h1.main_page {
 @media screen and (max-width: 1290px) {
   .key_data {
     flex-direction: row;
-    justify-content: space-evenly;
+    gap: 15px;
   }
 }
 
