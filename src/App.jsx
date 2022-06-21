@@ -21,6 +21,9 @@ function App() {
                             <Route path="/user/:id">
                                 <Main />
                             </Route>
+                            <Route path="error/:error">
+                                <Error />
+                            </Route>
                             <Route path="*">
                                 <Error />
                             </Route>

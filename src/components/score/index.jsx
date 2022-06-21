@@ -19,8 +19,16 @@ import {
  */
 
 function Score({ data }) {
+    console.log('ICI SCORE!', 'font-size:25px;');
     console.log(data);
-    const dataScore = [{ score: data.todayScore }];
+    const dataScore = [];
+    if (data.todayScore) {
+        dataScore.push({ score: data.todayScore });
+    }
+    if (data.score) {
+        dataScore.push({ score: data.score });
+    }
+    console.log('dataScore', dataScore, 'fontSize: 25px;');
     const style = {
         top: '50%',
         right: 0,

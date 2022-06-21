@@ -7,14 +7,14 @@ import Sessions from '../sessions';
 import { Context } from '../../constants/DataContext';
 // import DataContext from '../../constants/DataContext';
 import { useContext, useEffect } from 'react';
-import { Database } from '../../constants/GetData';
-import { useParams } from 'react-router';
+import { /*MockedDatabase as*/ Database } from '../../constants/GetData';
+import { Redirect, useParams } from 'react-router';
 
 //build main page, call all datas and send it to components as data
 function Main() {
     const { id } = useParams();
 
-    console.log('USER ID :' + id);
+    console.log('%cUSER ID :' + id, 'font-size:25px;');
 
     const {
         dataMain,
@@ -32,22 +32,27 @@ function Main() {
     } = useContext(Context);
 
     const ctx = {
-        dataMain,
+        // dataMain,
         setDataMain,
-        dataActivity,
+        // dataActivity,
         setDataActivity,
-        dataSessions,
+        // dataSessions,
         setDataSessions,
-        dataPerformance,
+        // dataPerformance,
         setDataPerformance,
-        userId,
+        // userId,
         setUserId,
         setLoading,
-        setError,
+        setError: (code) => {
+            console.log('error : ', code);
+        },
     };
-    setUserId(id);
+    console.log('between  47 and 48');
+
+    console.log('setUserId');
 
     useEffect(() => {
+        setUserId(id);
         async function loadData() {
             console.log('async loadData');
             setLoading(true);
@@ -62,7 +67,7 @@ function Main() {
 
     // console.log('dataMain');
     // console.log(Object.keys(dataMain).length);
-    // console.log(dataMain);
+    console.log('dataMain', dataMain);
 
     return (
         <div className="info_block">
@@ -102,7 +107,9 @@ function Main() {
                                 )}
                             </div>
                             <div className="wrap_score">
-                                {dataMain.hasOwnProperty('todayScore') ? (
+                                {console.log('COUCOU')}
+                                {dataMain.hasOwnProperty('todayScore') ||
+                                dataMain.hasOwnProperty('score') ? (
                                     <Score data={dataMain} />
                                 ) : (
                                     ''

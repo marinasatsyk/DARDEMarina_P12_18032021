@@ -1,3 +1,4 @@
+/*
 .aside {
     background: black;
     width: 117px;
@@ -15,6 +16,35 @@
         width: 138px;
         white-space: nowrap;
     }
+}
+*/
+
+.aside {
+    position: fixed;
+    background: black;
+    width: 117px;
+    top: 0;
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    z-index: -1;
+
+    .copiryght {
+        color: white;
+        transform: rotate(-0.25turn);
+        margin-left: -10%;
+        position: absolute;
+        bottom: 100px;
+        max-width: fit-content;
+        font-size: 12px;
+        width: 138px;
+        white-space: nowrap;
+    }
+}
+
+.greeteng {
+    margin: 60px;
 }
 
 .wrap_all_img {

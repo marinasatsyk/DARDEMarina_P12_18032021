@@ -1,9 +1,16 @@
+/*
 .wrapper_charts {
     display: flex;
     width: calc(100% - 117px);
     height: 615px;
     justify-content: space-between;
     padding: 60px;
+}
+*/
+
+.wrapper_charts {
+    display: flex;
+    gap: 20px;
 }
 
 .charts {
@@ -15,4 +22,7 @@
 .wrap_small_charts {
     display: flex;
     justify-content: space-between;
+}
+
+@media screen and (max-width: 1240px) {
 }

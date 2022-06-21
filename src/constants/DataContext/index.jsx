@@ -4,8 +4,8 @@ import { useState, createContext } from 'react';
 export const Context = createContext();
 /**
  *
- * @param {Reactelement} param0
- * @returns
+ * @param {*} param0
+ * @returns React element Provider
  */
 const DataProvider = ({ children }) => {
     const [dataMain, setDataMain] = useState([]);

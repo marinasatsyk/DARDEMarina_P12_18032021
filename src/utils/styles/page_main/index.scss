@@ -1,10 +1,12 @@
 .wrapper_body {
     display: flex;
 }
+
 h1.main_page {
     font-size: 48px;
 }
 
 .info_block {
-    width: 100%;
+    width: calc(100% - 118px);
+    margin-left: 118px;
 }
