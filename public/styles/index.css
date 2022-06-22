@@ -143,6 +143,12 @@ h1.main_page {
   height: 263px;
   border: 1px solid black;
   border-radius: 5px;
+  background: #fbfbfb;
+  position: relative;
+}
+.wrap_score h2 {
+  position: absolute;
+  margin: 0;
 }
 
 .radialLegend {

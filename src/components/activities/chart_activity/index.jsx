@@ -155,7 +155,7 @@ function ChartActivity({ data }) {
                             fontSize: '14px',
                             fontWeight: '300',
                         }}
-                        dy={15}
+                        dy={10}
                         tickLine={false}
                         axisLine={false}
                     />
