@@ -1,9 +1,14 @@
+//@ts-check
+
 import KeyElem from './key_elem';
+import PropTypes from 'prop-types';
 
 /**
- * data from `http://localhost:3000/user/${userId}`
- * @returns
+ *  KeyData build the block of  all  elements-counter  of calories, proteins, carbohydrates, lipids
+ * @param {Object} props
+ * @returns {React.ReactElement}
  */
+
 function KeyData({ data }) {
     console.log(data);
     /**
@@ -22,4 +27,7 @@ function KeyData({ data }) {
     );
 }
 
+KeyData.propTypes = {
+    data: PropTypes.object.isRequired,
+};
 export default KeyData;

@@ -1,19 +1,26 @@
+//@ts-check
+
 import ActivitieS from '../activities';
 import KeyData from '../keydata';
 import PerformanceUser from '../performance';
 import Score from '../score';
 import Sessions from '../sessions';
 import { Context } from '../../constants/DataContext';
-// import DataContext from '../../constants/DataContext';
 import { useContext, useEffect } from 'react';
 import { /*MockedDatabase as*/ Database } from '../../constants/GetData';
 import { Redirect, useParams } from 'react-router';
 
-//build main page, call all datas and send it to components as data
+/**
+ * build main page, call all datas and send it to components as data
+ * @returns {React.ReactElement}
+ */
 function Main() {
+    /**
+     * const id get the number user's Id for set it in data
+     * @const {number|string}
+     */
+    //@ts-ignore
     const { id } = useParams();
-
-    console.log('%cUSER ID from main func:' + id, 'font-size:25px;');
 
     const {
         dataMain,
@@ -30,26 +37,22 @@ function Main() {
         setError,
     } = useContext(Context);
 
+    // ctx variable for save and pass the states while call data
+
     const ctx = {
-        // dataMain,
         setDataMain,
-        // dataActivity,
         setDataActivity,
-        // dataSessions,
         setDataSessions,
-        // dataPerformance,
         setDataPerformance,
-        // userId,
         setUserId,
         setLoading,
         setError: (code) => {
             console.log('error : ', code);
         },
     };
-    console.log('between  47 and 48');
-
-    console.log('setUserId');
-
+    console.log('dataActivity FROM MAIN');
+    console.log(dataActivity);
+    // @ts-ignore
     useEffect(() => {
         setUserId(id);
         async function loadData() {
@@ -64,8 +67,10 @@ function Main() {
         loadData();
     }, [id, setLoading]);
 
-    console.log('dataMain', dataMain);
-
+    console.log('dataMain FROM MAIN');
+    console.log(dataMain);
+    console.log('dataMain FROM MAIN');
+    console.log(dataActivity);
     return (
         <div className="info_block">
             <div className="greetings">
@@ -113,7 +118,6 @@ function Main() {
                                 )}
                             </div>
                             <div className="wrap_score">
-                                {console.log('COUCOU')}
                                 {dataMain.hasOwnProperty('todayScore') ||
                                 dataMain.hasOwnProperty('score') ? (
                                     <Score data={dataMain} />

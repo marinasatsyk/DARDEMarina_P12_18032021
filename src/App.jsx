@@ -1,3 +1,5 @@
+//@ts-check
+
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Aside from './components/aside';
@@ -5,7 +7,10 @@ import Error from './components/error';
 import Header from './components/header';
 import Main from './components/main';
 import DataProvider from './constants/DataContext';
-
+/**
+ * App is function router
+ * @returns {React.ReactElement}
+ */
 function App() {
     return (
         <DataProvider>

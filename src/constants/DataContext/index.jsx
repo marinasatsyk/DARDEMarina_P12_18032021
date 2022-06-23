@@ -1,11 +1,12 @@
 import React from 'react';
 import { useState, createContext } from 'react';
+import PropTypes from 'prop-types';
 
 export const Context = createContext();
 /**
- *
- * @param {*} param0
- * @returns React element Provider
+ * Provider for all elements
+ * @param {*} {React.ReactElement.children}
+ * @returns {React.ReactElement}
  */
 const DataProvider = ({ children }) => {
     const [dataMain, setDataMain] = useState([]);
@@ -41,3 +42,7 @@ const DataProvider = ({ children }) => {
 };
 
 export default DataProvider;
+
+DataProvider.propTypes = {
+    children: PropTypes.any,
+};

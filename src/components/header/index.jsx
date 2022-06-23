@@ -1,5 +1,9 @@
 import logo from '../../assets/logo.svg';
 
+/**
+ * Header element
+ * @returns {React.ReactElement} Header of page
+ */
 function Header() {
     return (
         <header>

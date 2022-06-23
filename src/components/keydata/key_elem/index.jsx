@@ -1,11 +1,20 @@
+//@ts-check
 import React from 'react';
 import PropTypes from 'prop-types';
+//@ts-ignore
 import calories from '../../../assets/energy.svg';
+//@ts-ignore
 import proteines from '../../../assets/chicken.svg';
+//@ts-ignore
 import glucides from '../../../assets/apple.svg';
+//@ts-ignore
 import lipides from '../../../assets/cheeseburger.svg';
 
-//build key elem depending on content of dataKey
+/**
+ *  KeyElem build the elem-counter  of calories, proteins, carbohydrates, lipids
+ * @param {Object} props
+ * @returns  {React.ReactElement}
+ */
 function KeyElem({ data, unit }) {
     console.log('=======>dataKey====');
     console.log(data);
@@ -45,7 +54,7 @@ function KeyElem({ data, unit }) {
                 {unit === 'calorieCount' ? (
                     <>
                         <div className="amount calorie">
-                            {`${([data.calorieCount] / 1000).toFixed(3)}kCal`}
+                            {`${(+[data.calorieCount] / 1000).toFixed(3)}kCal`}
                         </div>
                         <div className="unit calorie">Calories</div>
                     </>
@@ -88,12 +97,7 @@ function KeyElem({ data, unit }) {
 }
 
 KeyElem.propTypes = {
-    data: PropTypes.shape({
-        calorieCount: PropTypes.number,
-        proteinCount: PropTypes.number,
-        carbohydrateCount: PropTypes.number,
-        lipidCount: PropTypes.number,
-    }),
-    unit: PropTypes.string,
+    data: PropTypes.object.isRequired,
+    unit: PropTypes.string.isRequired,
 };
 export default KeyElem;

@@ -3,6 +3,11 @@ import swimming from '../../assets/swimming.svg';
 import cycling from '../../assets/cycling.svg';
 import dumbbells from '../../assets/dumbbells.svg';
 
+/**
+ * React element for build sidebar
+ *  @returns {React.ReactElement} Aside sidebar
+ */
+
 function Aside() {
     return (
         <div className="aside">

@@ -1,17 +1,41 @@
-import { func } from 'prop-types';
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import ChartActivity from './chart_activity';
+//@ts-check
 
+import React, { PureComponent } from 'react';
+import ChartActivity from './chart_activity';
+import PropTypes, { arrayOf, number, string } from 'prop-types';
+
+/**
+ * Activities builds chart of activies
+ * @param {Object} props
+ * @returns {React.ReactElement}
+ */
 function ActivitieS({ data }) {
     //change the format of day
+    console.log('activities data BEFOR change format');
+    console.log(data);
 
-    const sessionsData = data.sessions.map((item, index) => {
+    const sessionsData_var = [...data.sessions];
+
+    // Object.keys(data).map(function (entry, index) => {
+    //     console.log(entry);
+    //     // if (entry === 'sessions') {
+    //     //     return index;
+    //     // }
+    // });
+    console.log('<<<<<<<<<<<<<<<<sessionsData_var>>>>>>>>>>>');
+    console.log(sessionsData_var);
+
+    const sessionsData = sessionsData_var.map((item, index) => {
         item.day = index + 1;
         return item;
     });
-    console.log('============activityCustom');
-    console.log(data);
+
+    // }
+    //   let sessionsData = [...data.sessions];
+    //  sessionsData = [...data.sessions]
+
+    console.log('============AFTER chage sessionsData');
+    console.log(sessionsData);
 
     return (
         <>
@@ -30,7 +54,7 @@ function ActivitieS({ data }) {
     );
 }
 
-ActivitieS.propTypes = {
-    data: PropTypes.object,
+ActivitieS.propType = {
+    data: PropTypes.object.isRequired,
 };
 export default ActivitieS;

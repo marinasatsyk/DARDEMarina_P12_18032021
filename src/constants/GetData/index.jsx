@@ -1,20 +1,22 @@
+//@ts-check
 import axios from 'axios';
 import { Component } from 'react';
 import mockDataMain from '../mockdata/USER_MAIN_DATA';
 import mockDataSessions from '../mockdata/USER_AVERAGE_SESSIONS';
 import mockDataActivity from '../mockdata/USER_ACTIVITY';
 import mockDataPerformance from '../mockdata/USER_PERFORMANCE';
+import PropTypes from 'prop-types';
 
 /**
- *
+ *This is  generic func for use data from localStorage if there's otherwise axios request.
  * @param {number} currentUser
  * @param {Object} lsData data from local storage
- * @param {Function} setFunc
+ * @param {Function} setFunc function of state of downoload status
  * @param {string} url
  * @param {string} dataName
  * @param {Function} loadFunc function of state of downoload status
- * @param {Function} errFunc
- * @returns Object generic func for use data from localStorage if there's otherwise axios request.
+ * @param {Function} errFunc function of state of downoload status
+ * @returns Object
  */
 async function GetData(
     currentUser,
@@ -38,7 +40,6 @@ async function GetData(
             setFunc(data.data);
             localStorage.setItem(dataName, JSON.stringify(data.data));
             console.log('====from axios');
-            console.log(data.data);
         }
     } catch (error) {
         errFunc(error);
@@ -49,57 +50,76 @@ async function GetData(
 }
 
 /**
- * @type {import('react').ClassType}
+ * Class generic API
  */
 export class Database {
+    /**
+     * static methode for get main data
+     * @property {Function} getUser
+     * @param {number} userId
+     * @param {Object} context this object contains set methodes of states
+     * @returns {Promise} Promise object represents the elements of dataMain
+     */
     static async getUser(userId, context) {
-        console.log('->>> USER ID : ' + userId);
-        console.log('**** ', context.setDataMain);
         return await GetData(
             userId,
             localStorage.getItem('dataMain'),
             context.setDataMain,
             `http://localhost:3000/user/${userId}`,
-            // mockDataMain,
             'dataMain',
             context.setLoading,
             context.setError
         );
     }
 
+    /**
+     * static methode for get activity data
+     * @param {Number} userId
+     * @param {Object} context this object contains set methodes of states
+     * @returns {Object} contains  elements of dataActivity
+     */
     static async getActivity(userId, context) {
         return await GetData(
             userId,
             localStorage.getItem('dataActivity'),
             context.setDataActivity,
             `http://localhost:3000/user/${userId}/activity`,
-            // mockDataActivity,
             'dataActivity',
             context.setLoading,
             context.setError
         );
     }
 
+    /**
+     * static methode for get sessions data
+     * @param {Number} userId
+     * @param {Object} context this object contains set methodes of states
+     * @returns {Object} contains  elements of dataSessions
+     */
     static async getSessions(userId, context) {
         return await GetData(
             userId,
             localStorage.getItem('dataSessions'),
             context.setDataSessions,
             `http://localhost:3000/user/${userId}/average-sessions`,
-            // mockDataSessions,
             'dataSessions',
             context.setLoading,
             context.setError
         );
     }
 
+    /**
+     * static methode for get performance data
+     * @param {Number} userId
+     * @param {Object} context this object contains set methodes of states
+     * @returns {Object} contains  elements of dataPerformance
+     */
     static async getPerformance(userId, context) {
         return await GetData(
             userId,
             localStorage.getItem('dataPerformance'),
             context.setDataPerformance,
             `http://localhost:3000/user/${userId}/performance`,
-            // mockDataPerformance,
             'dataPerformance',
             context.setLoading,
             context.setError
@@ -112,7 +132,7 @@ export class Database {
 }
 
 /**
- *
+ * async function for get data mocked
  * @param {number} currentUser
  * @param {Object} lsData data from local storage
  * @param {Function} setFunc
@@ -138,13 +158,15 @@ async function GetMockedData(
             console.log('====from LS');
             setFunc(JSON.parse(lsData));
         } else {
+            /**
+             * uId is number of user's ID
+             * @const {number}
+             */
             const uId = +currentUser;
             console.log('mocked user : ', currentUser);
             console.log(mockedData);
             const data = mockedData.find((d) => {
-                console.log(d);
                 if (uId === d.id || uId === d.userId) {
-                    console.log('FOUND');
                     return true;
                 } else {
                     return false;
@@ -155,7 +177,6 @@ async function GetMockedData(
             setFunc(data);
             localStorage.setItem(dataName, JSON.stringify(data));
             console.log('====from mocked');
-            console.log(data);
         }
     } catch (error) {
         errFunc(error);
@@ -163,11 +184,20 @@ async function GetMockedData(
         loadFunc(false);
     }
 }
-
+/**
+ *Class for get data mocked
+ *  @extends Database
+ */
 export class MockedDatabase extends Database {
+    /**
+     * static methode for get main mocked data
+     * @param {number} userId
+     * @param {Object} context this object contains set methodes of states
+     * @returns {Object} contains  main mocked data
+     */
     static async getUser(userId, context) {
-        console.log('->>> USER ID FROM MAIN: ' + userId);
-        console.log('**** ', context.setDataMain);
+        console.log('->>> MockedDatabase');
+
         return await GetMockedData(
             userId,
             localStorage.getItem('dataMain'),
@@ -179,6 +209,12 @@ export class MockedDatabase extends Database {
         );
     }
 
+    /**
+     * static methode for get activity mocked data
+     * @param {Number} userId
+     * @param {Object} context this object contains set methodes of states
+     * @returns Object contains  elements of dataActivity mocked
+     */
     static async getActivity(userId, context) {
         return await GetMockedData(
             userId,
@@ -191,6 +227,12 @@ export class MockedDatabase extends Database {
         );
     }
 
+    /**
+     * static methode for get sessions  mocked data
+     * @param {Number} userId
+     * @param {Object} context this object contains set methodes of states
+     * @returns Object contains  elements of dataSessions mocked
+     */
     static async getSessions(userId, context) {
         return await GetMockedData(
             userId,
@@ -203,6 +245,12 @@ export class MockedDatabase extends Database {
         );
     }
 
+    /**
+     * static methode for get performance mocked data
+     * @param {Number} userId
+     * @param {Object} context this object contains set methodes of states
+     * @returns Object contains  elements of dataPerformance mocked
+     */
     static async getPerformance(userId, context) {
         return await GetMockedData(
             userId,
@@ -221,3 +269,13 @@ export class MockedDatabase extends Database {
 }
 
 export default GetData;
+
+GetData.propTypes = {
+    currentUser: PropTypes.number.isRequired,
+    lsData: PropTypes.object.isRequired,
+    setFunc: PropTypes.func.isRequired,
+    url: PropTypes.string.isRequired,
+    dataName: PropTypes.string.isRequired,
+    loadFunc: PropTypes.func.isRequired,
+    errFunc: PropTypes.func.isRequired,
+};

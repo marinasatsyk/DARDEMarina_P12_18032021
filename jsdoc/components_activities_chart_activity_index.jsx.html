@@ -1,4 +1,32 @@
-//@ts-check
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/activities/chart_activity/index.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/activities/chart_activity/index.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>//@ts-check
 import React, { PureComponent } from 'react';
 import {
     BarChart,
@@ -43,11 +71,11 @@ function ChartActivity({ data }) {
     console.log(data);
 
     const CustomTooltip = ({ active, payload }) => {
-        if (active && payload && payload.length) {
+        if (active &amp;&amp; payload &amp;&amp; payload.length) {
             getNameOfPage(payload);
 
             return (
-                <div
+                &lt;div
                     className="tooltip_activitys"
                     style={{
                         backgroundColor: 'red',
@@ -64,11 +92,11 @@ function ChartActivity({ data }) {
                     }}
                 >
                     {payload.map((item) => (
-                        <p
+                        &lt;p
                             key={`${item.value}${item.name}`}
-                        >{`${item.value}${item.name}`}</p>
+                        >{`${item.value}${item.name}`}&lt;/p>
                     ))}
-                </div>
+                &lt;/div>
             );
         }
         return null;
@@ -89,7 +117,7 @@ function ChartActivity({ data }) {
     const renderLegend = (props) => {
         const { payload } = props;
         return (
-            <div
+            &lt;div
                 className="customLegend_wrap"
                 style={{
                     display: 'flex',
@@ -97,48 +125,48 @@ function ChartActivity({ data }) {
                     justifyContent: 'space-between',
                 }}
             >
-                <div
+                &lt;div
                     className="title_activity"
                     style={{ fontSize: '15px', fontWeight: 'bold' }}
                 >
                     Activité quotidienne
-                </div>
-                <div
+                &lt;/div>
+                &lt;div
                     style={{
                         display: 'flex',
                         flexDirection: 'row',
                         justifyContent: 'space-evenly',
                     }}
                 >
-                    <div
+                    &lt;div
                         style={{
                             display: 'flex',
                             flexDirection: 'row',
                             justifyContent: 'space-between',
                         }}
                     >
-                        <Dot color="#202020" />
-                        <Text>Poids (kg)</Text>
-                    </div>
-                    <div
+                        &lt;Dot color="#202020" />
+                        &lt;Text>Poids (kg)&lt;/Text>
+                    &lt;/div>
+                    &lt;div
                         style={{
                             display: 'flex',
                             flexDirection: 'row',
                             justifyContent: 'space-between',
                         }}
                     >
-                        <Dot color="#E00000" />
-                        <Text>Calories brûlées (kCal)</Text>
-                    </div>
-                </div>
-            </div>
+                        &lt;Dot color="#E00000" />
+                        &lt;Text>Calories brûlées (kCal)&lt;/Text>
+                    &lt;/div>
+                &lt;/div>
+            &lt;/div>
         );
     };
 
     return (
-        <Container>
-            <ResponsiveContainer width="100%" aspect={3}>
-                <BarChart
+        &lt;Container>
+            &lt;ResponsiveContainer width="100%" aspect={3}>
+                &lt;BarChart
                     width={500}
                     height={300}
                     data={data}
@@ -150,8 +178,8 @@ function ChartActivity({ data }) {
                     }}
                     barCategoryGap="35%"
                 >
-                    <CartesianGrid vertical={false} strokeDasharray="4 1" />
-                    <XAxis
+                    &lt;CartesianGrid vertical={false} strokeDasharray="4 1" />
+                    &lt;XAxis
                         dataKey="day"
                         stroke="#9B9EAC"
                         tick={{
@@ -162,8 +190,8 @@ function ChartActivity({ data }) {
                         tickLine={false}
                         axisLine={false}
                     />
-                    <YAxis yAxisId="left" orientation="left" stroke="none" />
-                    <YAxis
+                    &lt;YAxis yAxisId="left" orientation="left" stroke="none" />
+                    &lt;YAxis
                         yAxisId="right"
                         orientation="right"
                         stroke="#9B9EAC"
@@ -180,7 +208,7 @@ function ChartActivity({ data }) {
                         axisLine={false}
                     />
 
-                    <Legend
+                    &lt;Legend
                         verticalAlign="top"
                         height={64}
                         iconType="circle"
@@ -189,27 +217,27 @@ function ChartActivity({ data }) {
                         content={renderLegend}
                     />
 
-                    <Tooltip
+                    &lt;Tooltip
                         //@ts-ignore
-                        content={<CustomTooltip />}
+                        content={&lt;CustomTooltip />}
                     />
-                    <Bar
+                    &lt;Bar
                         yAxisId="right"
                         dataKey="kilogram"
                         fill="#282D30"
                         radius={[3.5, 3.5, 0, 0]}
                         maxBarSize={7}
                     />
-                    <Bar
+                    &lt;Bar
                         yAxisId="left"
                         dataKey="calories"
                         fill="#E60000"
                         radius={[3.5, 3.5, 0, 0]}
                         maxBarSize={7}
                     />
-                </BarChart>
-            </ResponsiveContainer>
-        </Container>
+                &lt;/BarChart>
+            &lt;/ResponsiveContainer>
+        &lt;/Container>
     );
 }
 
@@ -217,3 +245,26 @@ ChartActivity.propType = {
     data: PropTypes.object.isRequired,
 };
 export default ChartActivity;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Database.html">Database</a></li><li><a href="MockedDatabase.html">MockedDatabase</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ActivitieS">ActivitieS</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#Aside">Aside</a></li><li><a href="global.html#ChartActivity">ChartActivity</a></li><li><a href="global.html#ChartPerformance">ChartPerformance</a></li><li><a href="global.html#ChartSessions">ChartSessions</a></li><li><a href="global.html#DataProvider">DataProvider</a></li><li><a href="global.html#Error">Error</a></li><li><a href="global.html#GetData">GetData</a></li><li><a href="global.html#GetMockedData">GetMockedData</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#KeyData">KeyData</a></li><li><a href="global.html#KeyElem">KeyElem</a></li><li><a href="global.html#Main">Main</a></li><li><a href="global.html#PerformanceUser">PerformanceUser</a></li><li><a href="global.html#Score">Score</a></li><li><a href="global.html#Sessions">Sessions</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Thu Jun 23 2022 15:20:15 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

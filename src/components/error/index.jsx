@@ -1,6 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router';
+import PropTypes from 'prop-types';
 
+/**
+ * Error page
+ * @returns {React.ReactElement} error warning
+ */
 function Error() {
     const { error } = useParams();
     return (

@@ -1,9 +1,13 @@
+//@ts-check
+
 import React from 'react';
 import ChartSessions from './chart_sessions';
+import PropTypes from 'prop-types';
 
 /**
- * data from `http://localhost:3000/user/${userId}/average-sessions`
- * @returns
+ * Sessions returns an React elements contains Linechart of sessions
+ * @param {Object} props
+ * @returns {React.ReactElement}
  */
 function Sessions({ data }) {
     return (
@@ -13,4 +17,7 @@ function Sessions({ data }) {
     );
 }
 
+Sessions.propTypes = {
+    data: PropTypes.object.isRequired,
+};
 export default Sessions;

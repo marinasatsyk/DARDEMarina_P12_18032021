@@ -1,4 +1,6 @@
+//@ts-check
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import {
     Radar,
     RadarChart,
@@ -9,10 +11,19 @@ import {
     Legend,
 } from 'recharts';
 
+/**
+ * ChartPerformance builde  radarChart of performance
+ * @param {Object} props
+ * @returns {React.ReactElement}
+ */
+
 function ChartPerformance({ data }) {
     const kind_entries = Object.entries(data.kind);
 
-    //returns data in format conform for radarChart
+    /**
+     *   temp_data_perform returns data in format conform for radarChart
+     * @type {Array}
+     */
     const temp_data_perform = data.data.map((item) => {
         for (let i = 0; i < kind_entries.length; i++) {
             if (item.kind === i + 1) {
@@ -22,7 +33,11 @@ function ChartPerformance({ data }) {
         return item;
     });
 
-    //reverse order and change language
+    /**
+     * reverse order and change language
+     * @type {Array}
+     */
+
     const data_perform = temp_data_perform
         .map((item) => {
             if (item.kind === 'cardio') {
@@ -68,11 +83,7 @@ function ChartPerformance({ data }) {
                         tickLine={false}
                         axisLine={false}
                     />
-                    <PolarRadiusAxis
-                        domain={[0, 'dataMax']}
-                        stroke="none"
-                        // tick={false}
-                    />
+                    <PolarRadiusAxis domain={[0, 'dataMax']} stroke="none" />
                     <Radar
                         dataKey="value"
                         stroke="none"
@@ -84,4 +95,8 @@ function ChartPerformance({ data }) {
         </>
     );
 }
+
+ChartPerformance.propTypes = {
+    data: PropTypes.object.isRequired,
+};
 export default ChartPerformance;

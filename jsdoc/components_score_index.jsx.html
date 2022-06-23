@@ -29,110 +29,103 @@
             <pre class="prettyprint source linenums"><code>//@ts-check
 
 import PropTypes from 'prop-types';
-import {
-    RadialBarChart,
-    RadialBar,
-    Legend,
-    ResponsiveContainer,
-    PolarAngleAxis,
-    Label,
-} from 'recharts';
+import { PieChart, Pie, ResponsiveContainer, Cell } from 'recharts';
+import styled from 'styled-components';
 
+const Objective = styled.p`
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(0, 0, 0, 0.65);
+    font-weight: 500;
+    line-height: 26px;
+    span {
+        color: rgba(0, 0, 0, 0.8);
+        font-weight: 700;
+        font-size: 26px;
+    }
+`;
+
+const InnerCercle = styled.div`
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 57%;
+    height: 57%;
+    border-radius: 50%;
+    background-color: white;
+`;
 /**
- * Activity with a Radial Bar Chart
- *
+ * Score  return React Element contains chart of today score
  * @param {Object} props
- * @param {Object} props.data
  * @returns {React.ReactElement}
  */
-
 function Score({ data }) {
-    console.log(data);
-    const dataScore = [{ score: data.todayScore }];
-    const style = {
-        top: '50%',
-        right: 0,
-        transform: 'translate(0, -50%)',
-        lineHeight: '24px',
-    };
+    const dataScore = [];
+    if (data.todayScore) {
+        dataScore.push({ score: data.todayScore });
+    }
+    if (data.score) {
+        dataScore.push({ score: data.score });
+    }
+    if (dataScore.length === 0) {
+        return null;
+    }
 
-    const renderLegend = (props) => {
-        const { payload } = props;
-        console.log(payload);
-        return (
-            &lt;div>
-                &lt;div className="radialLegend">
-                    &lt;span className="percent">
-                        {payload[0].payload.score * 100}%
-                    &lt;/span>
-                    &lt;p>de votre objectif&lt;/p>
-                &lt;/div>
-            &lt;/div>
-        );
-    };
+    if (dataScore.length > 0) {
+        dataScore.map((entry, index) => {
+            if (index === 0) {
+                dataScore.push({ score: 1 - entry.score });
+            }
+        });
+    }
 
     return (
         &lt;>
+            &lt;h2 className="title_score">Score&lt;/h2>
+            &lt;InnerCercle />
             &lt;ResponsiveContainer width="100%" height="100%">
-                &lt;RadialBarChart
-                    cx="50%"
-                    cy="50%"
-                    innerRadius="80%"
-                    outerRadius="80%"
-                    barSize={12}
-                    data={dataScore}
-                    startAngle={90}
-                    endAngle={450}
-
-                    // @ts-ignore
-                >
-                    &lt;PolarAngleAxis
-                        type="number"
-                        domain={[0, 1]}
-                        angleAxisId={0}
-                        tick={false}
-                    />
-                    &lt;RadialBar
-                        // @ts-ignore
-                        minAngle={300}
-                        background={{ fill: '#FBFBFB' }}
-                        clockWise
+                &lt;PieChart>
+                    &lt;Pie
+                        data={dataScore}
                         dataKey="score"
+                        innerRadius={73}
+                        outerRadius={85}
+                        startAngle={90}
+                        endAngle={460}
                         cornerRadius={10}
-                        fill="red"
-                    />
-                    &lt;Label
-                        value="Pages of my website"
-                        offset={0}
-                        position="insideBottom"
-                    />
-                    &lt;text
-                        textAnchor="middle"
-                        dominantBaseline="middle"
-                        className="scoreLabel"
-                        style={{
-                            padding: '30px',
-                            transform: 'translate(15%, 10%)',
-                            color: '#000',
-                            fontWeight: '500',
-                            fontSize: '18px',
-                        }}
                     >
-                        Score
-                    &lt;/text>
-                    &lt;Legend
-                        content={renderLegend}
-                        layout="horizontal"
-                        verticalAlign="middle"
-                        wrapperStyle={style}
-                    />
-                &lt;/RadialBarChart>
+                        {dataScore.map((entry, index) => {
+                            if (index === 0) {
+                                return (
+                                    &lt;Cell
+                                        key={`cell-${index}`}
+                                        fill="#FF0000"
+                                    />
+                                );
+                            }
+                            return (
+                                &lt;Cell
+                                    key={`cell-${index}`}
+                                    stroke="transparent"
+                                    fill="transparent"
+                                />
+                            );
+                        })}
+                    &lt;/Pie>
+                &lt;/PieChart>
             &lt;/ResponsiveContainer>
+            &lt;Objective>
+                &lt;span>{dataScore[0].score * 100}%&lt;/span>
+                &lt;br /> de votre
+                &lt;br /> objectif
+            &lt;/Objective>
         &lt;/>
     );
 }
 
-export default Score;
 Score.propType = {
     data: PropTypes.object.isRequired,
 };
@@ -140,6 +133,7 @@ Score.propType = {
 Score.defaultProps = {
     data: {},
 };
+export default Score;
 </code></pre>
         </article>
     </section>
@@ -150,13 +144,13 @@ Score.defaultProps = {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#DataProvider">DataProvider</a></li><li><a href="global.html#GetData">GetData</a></li><li><a href="global.html#KeyData">KeyData</a></li><li><a href="global.html#Score">Score</a></li><li><a href="global.html#Sessions">Sessions</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Database.html">Database</a></li><li><a href="MockedDatabase.html">MockedDatabase</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ActivitieS">ActivitieS</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#Aside">Aside</a></li><li><a href="global.html#ChartActivity">ChartActivity</a></li><li><a href="global.html#ChartPerformance">ChartPerformance</a></li><li><a href="global.html#ChartSessions">ChartSessions</a></li><li><a href="global.html#DataProvider">DataProvider</a></li><li><a href="global.html#Error">Error</a></li><li><a href="global.html#GetData">GetData</a></li><li><a href="global.html#GetMockedData">GetMockedData</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#KeyData">KeyData</a></li><li><a href="global.html#KeyElem">KeyElem</a></li><li><a href="global.html#Main">Main</a></li><li><a href="global.html#PerformanceUser">PerformanceUser</a></li><li><a href="global.html#Score">Score</a></li><li><a href="global.html#Sessions">Sessions</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Mon Jun 20 2022 20:43:52 GMT+0200 (heure d’été d’Europe centrale)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Thu Jun 23 2022 15:20:16 GMT+0200 (heure d’été d’Europe centrale)
 </footer>
 
 <script> prettyPrint(); </script>
