@@ -98,7 +98,7 @@ function Score({ data }) {
     );
 }
 
-Score.propType = {
+Score.propTypes = {
     data: PropTypes.object.isRequired,
 };
 

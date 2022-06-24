@@ -11,6 +11,8 @@
 .wrapper_charts {
     display: flex;
     justify-content: space-between;
+    margin: 60px;
+
     @media screen and (max-width: 1290px) {
         flex-direction: column;
         align-items: center;
@@ -27,7 +29,4 @@
 .wrap_small_charts {
     display: flex;
     gap: 30px;
-}
-
-@media screen and (max-width: 1290px) {
 }

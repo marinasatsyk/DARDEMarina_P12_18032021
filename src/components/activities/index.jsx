@@ -11,7 +11,7 @@ import PropTypes, { arrayOf, number, string } from 'prop-types';
  */
 function ActivitieS({ data }) {
     //change the format of day
-    console.log('activities data BEFOR change format');
+    console.log('activities data BEFORE change format');
     console.log(data);
 
     const sessionsData_var = [...data.sessions];
@@ -54,7 +54,7 @@ function ActivitieS({ data }) {
     );
 }
 
-ActivitieS.propType = {
+ActivitieS.propTypes = {
     data: PropTypes.object.isRequired,
 };
 export default ActivitieS;

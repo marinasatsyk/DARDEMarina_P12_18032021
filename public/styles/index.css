@@ -103,6 +103,7 @@ h1.main_page {
 .wrapper_charts {
   display: flex;
   justify-content: space-between;
+  margin: 60px;
 }
 @media screen and (max-width: 1290px) {
   .wrapper_charts {

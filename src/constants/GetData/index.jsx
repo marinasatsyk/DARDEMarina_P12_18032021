@@ -1,9 +1,13 @@
 //@ts-check
 import axios from 'axios';
 import { Component } from 'react';
+//@ts-ignore
 import mockDataMain from '../mockdata/USER_MAIN_DATA';
+//@ts-ignore
 import mockDataSessions from '../mockdata/USER_AVERAGE_SESSIONS';
+//@ts-ignore
 import mockDataActivity from '../mockdata/USER_ACTIVITY';
+//@ts-ignore
 import mockDataPerformance from '../mockdata/USER_PERFORMANCE';
 import PropTypes from 'prop-types';
 

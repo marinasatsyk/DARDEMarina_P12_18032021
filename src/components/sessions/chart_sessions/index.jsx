@@ -20,7 +20,7 @@ import PropTypes from 'prop-types';
  * @returns {React.ReactElement}
  */
 function ChartSessions({ data }) {
-    console.log('ChartSess_elem');
+    console.log('***************ChartSess_elem');
     console.log(data);
     function CustomToolTip({ active, payload }) {
         if (active) {
@@ -65,8 +65,10 @@ function ChartSessions({ data }) {
                     onMouseMove={(e) => {
                         if (e.isTooltipActive === true) {
                             let div = document.querySelector('.wrap_sessions');
+                            //@ts-ignore
                             let windowWidth = div.clientWidth;
                             let mouseXpercentage = Math.round(
+                                //@ts-ignore
                                 (e.activeCoordinate.x / windowWidth) * 100
                             );
                             // @ts-ignore
@@ -126,6 +128,6 @@ function ChartSessions({ data }) {
 }
 
 ChartSessions.propTypes = {
-    data: PropTypes.object.isRequired,
+    data: PropTypes.array.isRequired,
 };
 export default ChartSessions;
