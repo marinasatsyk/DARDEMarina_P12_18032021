@@ -31,7 +31,7 @@ function ActivitieS({ data }) {
                     borderRadius: '5px',
                 }}
             >
-                <ChartActivity data={data.sessions} />
+                <ChartActivity data={sessionsData_var} />
             </div>
         </>
     );
