@@ -16,9 +16,6 @@ import lipides from '../../../assets/cheeseburger.svg';
  * @returns  {React.ReactElement}
  */
 function KeyElem({ data, unit }) {
-    console.log('=======>dataKey====');
-    console.log(data);
-    console.log(unit);
     return (
         <div className="wrap_key_elem">
             {unit === 'calorieCount' ? (

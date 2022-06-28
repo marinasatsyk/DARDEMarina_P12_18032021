@@ -47,7 +47,6 @@ dataSessions - LineChart (averagesessions)
 dataPerformance - RadarChart(activitieS)
 todayScore - PieChart (dataMain)
 dataKey - main.key(dataMain)
-
 */
 
 /**
@@ -61,17 +60,14 @@ function Profile({
     isAverageSessions,
     isActivity,
     isActivities,
+    showAll,
 }) {
-    console.log('isKeyData FROM PROFIL ');
-    console.log(isKeyData);
-
     /**
      * const id get the number user's Id for set it in data
      * @const {number|string}
      */
     //@ts-ignore
     const { id } = useParams();
-    console.log(id);
     const {
         dataMain,
         setDataMain,
@@ -89,13 +85,18 @@ function Profile({
         setError,
     } = useContext(Context);
 
-    console.log(userId);
     const ctx = {
+        dataMain,
         setDataMain,
+        dataActivity,
         setDataActivity,
+        dataSessions,
         setDataSessions,
+        dataPerformance,
         setDataPerformance,
+        userId,
         setUserId,
+        loading,
         setLoading,
         setError: (code) => {
             console.log('error : ', code);
@@ -104,9 +105,7 @@ function Profile({
 
     useEffect(() => {
         setUserId(id);
-        console.log(ctx);
         async function loadData() {
-            console.log('async loadData');
             setLoading(true);
             await Database.getUser(id, ctx);
             await Database.getActivity(id, ctx);
@@ -115,29 +114,8 @@ function Profile({
             setLoading(false);
         }
         loadData();
-    }, [id, setLoading]);
+    }, [id]);
 
-    //to be able to access key figures via /user/:id/key-data route
-    isKeyData &amp;&amp; console.table(dataMain.keyData);
-
-    //to be able to access today's goal completion via the /user/:id/today-score route
-    isTodayScore &amp;&amp; console.table(dataMain.score);
-
-    //to be able to access average session duration via the /user/:id/average-sessions route
-    isAverageSessions &amp;&amp; console.table(dataSessions.sessions);
-
-    //to be able to access sessions via the /user/:id/activities route
-    isActivities &amp;&amp; console.table(dataPerformance);
-
-    //to be able to access sessions via the /user/:id/activity route
-    isActivity &amp;&amp; console.table(dataActivity.sessions);
-
-    console.log('PROFILE BLOCK');
-    console.log(isKeyData);
-    console.log(dataMain);
-    console.log(dataActivity);
-    console.log(dataSessions);
-    console.log(dataPerformance);
     if (error) {
         return &lt;Error />;
     } else if (loading) {
@@ -153,45 +131,63 @@ function Profile({
 
                 &lt;div className="wrapper_charts">
                     &lt;div className="charts">
-                        &lt;div className="wrap_activities">
-                            {dataActivity.hasOwnProperty('sessions') ? (
+                        {dataActivity.hasOwnProperty('sessions') &amp;&amp;
+                        (isActivity || showAll) ? (
+                            &lt;div className="wrap_activities">
                                 &lt;ActivitieS data={dataActivity} />
-                            ) : (
-                                ''
-                            )}
-                        &lt;/div>
-                        &lt;div className="wrap_small_charts">
-                            &lt;div className="wrap_sessions">
-                                {dataSessions.hasOwnProperty('sessions') ? (
-                                    &lt;Sessions data={dataSessions} />
+                            &lt;/div>
+                        ) : (
+                            ''
+                        )}
+
+                        {showAll ||
+                        isAverageSessions ||
+                        isActivities ||
+                        isTodayScore ? (
+                            &lt;div className="wrap_small_charts">
+                                {dataSessions.hasOwnProperty('sessions') &amp;&amp;
+                                (isAverageSessions || showAll) ? (
+                                    &lt;div className="wrap_sessions">
+                                        &lt;Sessions data={dataSessions} />
+                                    &lt;/div>
+                                ) : (
+                                    ''
+                                )}
+
+                                {dataPerformance.hasOwnProperty('kind') &amp;&amp;
+                                (isActivities || showAll) ? (
+                                    &lt;div className="wrap_performance">
+                                        &lt;PerformanceUser
+                                            data={dataPerformance}
+                                        />
+                                    &lt;/div>
+                                ) : (
+                                    ''
+                                )}
+
+                                {(dataMain.hasOwnProperty('todayScore') ||
+                                    dataMain.hasOwnProperty('score')) &amp;&amp;
+                                (isTodayScore || showAll) ? (
+                                    &lt;div className="wrap_score">
+                                        &lt;Score data={dataMain} />
+                                    &lt;/div>
                                 ) : (
                                     ''
                                 )}
                             &lt;/div>
-                            &lt;div className="wrap_performance">
-                                {dataPerformance.hasOwnProperty('kind') ? (
-                                    &lt;PerformanceUser data={dataPerformance} />
-                                ) : (
-                                    ''
-                                )}
-                            &lt;/div>
-                            &lt;div className="wrap_score">
-                                {dataMain.hasOwnProperty('todayScore') ||
-                                dataMain.hasOwnProperty('score') ? (
-                                    &lt;Score data={dataMain} />
-                                ) : (
-                                    ''
-                                )}
-                            &lt;/div>
-                        &lt;/div>
-                    &lt;/div>
-                    &lt;div className="key_data">
-                        {dataMain.hasOwnProperty('keyData') ? (
-                            &lt;KeyData data={dataMain} />
                         ) : (
                             ''
                         )}
                     &lt;/div>
+
+                    {dataMain.hasOwnProperty('keyData') &amp;&amp;
+                    (isKeyData || showAll) ? (
+                        &lt;div className="key_data">
+                            &lt;KeyData data={dataMain} />
+                        &lt;/div>
+                    ) : (
+                        ''
+                    )}
                 &lt;/div>
             &lt;/div>
         );
@@ -206,6 +202,7 @@ Profile.propTypes = {
     isAverageSessions: PropTypes.bool,
     isActivity: PropTypes.bool,
     isActivities: PropTypes.bool,
+    showAll: PropTypes.bool,
 };
 </code></pre>
         </article>
@@ -223,7 +220,7 @@ Profile.propTypes = {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Fri Jun 24 2022 15:56:54 GMT+0200 (heure d’été d’Europe centrale)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Tue Jun 28 2022 15:38:46 GMT+0200 (heure d’été d’Europe centrale)
 </footer>
 
 <script> prettyPrint(); </script>

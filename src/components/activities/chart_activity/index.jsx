@@ -15,8 +15,6 @@ import styled from 'styled-components';
 
 const Container = styled.div``;
 
-// const Header = styled.div``;
-
 const Text = styled.p`
     font-weight: 500;
     font-size: 14px;
@@ -39,9 +37,6 @@ const Dot = styled.div`
  * @returns {React.ReactElement}
  */
 function ChartActivity({ data }) {
-    console.log('========>data ChartActivity');
-    console.log(data);
-
     const CustomTooltip = ({ active, payload }) => {
         if (active && payload && payload.length) {
             getNameOfPage(payload);

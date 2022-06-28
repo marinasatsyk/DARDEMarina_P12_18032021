@@ -19,7 +19,6 @@ dataSessions - LineChart (averagesessions)
 dataPerformance - RadarChart(activitieS)
 todayScore - PieChart (dataMain)
 dataKey - main.key(dataMain)
-
 */
 
 /**
@@ -35,22 +34,12 @@ function Profile({
     isActivities,
     showAll,
 }) {
-    console.log('isKeyData FROM PROFIL ');
-    console.log(
-        isKeyData,
-        isTodayScore,
-        isAverageSessions,
-        isActivity,
-        isActivities
-    );
-
     /**
      * const id get the number user's Id for set it in data
      * @const {number|string}
      */
     //@ts-ignore
     const { id } = useParams();
-    console.log(id);
     const {
         dataMain,
         setDataMain,
@@ -68,7 +57,6 @@ function Profile({
         setError,
     } = useContext(Context);
 
-    console.log(userId);
     const ctx = {
         dataMain,
         setDataMain,
@@ -89,9 +77,7 @@ function Profile({
 
     useEffect(() => {
         setUserId(id);
-        console.log(ctx);
         async function loadData() {
-            console.log('async loadData');
             setLoading(true);
             await Database.getUser(id, ctx);
             await Database.getActivity(id, ctx);
@@ -101,30 +87,6 @@ function Profile({
         }
         loadData();
     }, [id]);
-
-    // //to be able to access key figures via /user/:id/key-data route
-    // isKeyData && console.table(dataMain.keyData);
-
-    // //to be able to access today's goal completion via the /user/:id/today-score route
-    // isTodayScore && console.table(dataMain.score);
-
-    // //to be able to access average session duration via the /user/:id/average-sessions route
-    // isAverageSessions && console.table(dataSessions.sessions);
-
-    // //to be able to access sessions via the /user/:id/activities route
-    // isActivities && console.table(dataPerformance);
-
-    // //to be able to access sessions via the /user/:id/activity route
-    // isActivity && console.table(dataActivity.sessions);
-
-    // console.log('PROFILE BLOCK');
-    console.log(
-        'setDataMain :' + isKeyData,
-        'isTodayScore: ' + isTodayScore,
-        'isAverageSessions: ' + isAverageSessions,
-        'isActivity: ' + isActivity,
-        'isActivities: ' + isActivities
-    );
 
     if (error) {
         return <Error />;
@@ -141,7 +103,6 @@ function Profile({
 
                 <div className="wrapper_charts">
                     <div className="charts">
-                        {/* Activity */}
                         {dataActivity.hasOwnProperty('sessions') &&
                         (isActivity || showAll) ? (
                             <div className="wrap_activities">

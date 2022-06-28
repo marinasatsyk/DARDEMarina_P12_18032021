@@ -11,29 +11,12 @@ import PropTypes, { arrayOf, number, string } from 'prop-types';
  */
 function ActivitieS({ data }) {
     //change the format of day
-    console.log('activities data BEFORE change format');
-    console.log(data);
-
     const sessionsData_var = [...data.sessions];
-
-    // Object.keys(data).map(function (entry, index) => {
-    //     console.log(entry);
-    //     // if (entry === 'sessions') {
-    //     //     return index;
-    //     // }
-    // });
 
     sessionsData_var.map((item, index) => {
         item.day_d = index + 1;
         return item;
     });
-
-    // }
-    //   let sessionsData = [...data.sessions];
-    //  sessionsData = [...data.sessions]
-
-    console.log('============AFTER chage sessionsData');
-    // console.log(sessionsData);
 
     return (
         <>

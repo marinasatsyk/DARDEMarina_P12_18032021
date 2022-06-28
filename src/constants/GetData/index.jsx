@@ -142,7 +142,7 @@ async function GetMockedData(
         const lsData = localStorage.getItem(dataName);
 
         if (lsData && JSON.parse(lsData)._ID === currentUser) {
-            console.log('====from LS');
+            console.log('====from LS mocked');
             setFunc(JSON.parse(lsData));
         } else {
             /**
@@ -150,8 +150,6 @@ async function GetMockedData(
              * @const {number}
              */
             const uId = +currentUser;
-            console.log('mocked user : ', currentUser);
-            console.log(mockedData);
             const data = mockedData.find((d) => {
                 if (uId === d.id || uId === d.userId) {
                     return true;
@@ -159,7 +157,6 @@ async function GetMockedData(
                     return false;
                 }
             });
-            console.log('data : ', data);
             data._ID = currentUser;
             setFunc(data);
             localStorage.setItem(dataName, JSON.stringify(data));

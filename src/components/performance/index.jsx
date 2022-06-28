@@ -11,8 +11,6 @@ import PropTypes from 'prop-types';
 function PerformanceUser({ data }) {
     return (
         <>
-            {console.log('=========Performance')}
-            {console.log(data)}
             <ChartPerformance data={data} />
         </>
     );

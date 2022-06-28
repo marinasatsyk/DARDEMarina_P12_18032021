@@ -7,9 +7,6 @@ import PropTypes from 'prop-types';
  * @returns {React.ReactElement}
  */
 function Main({ data }) {
-    console.log('dataMain FROM MAIN');
-    console.log(data);
-
     return (
         <div className="greetings">
             <div className="wrap_greetings">

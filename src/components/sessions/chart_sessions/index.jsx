@@ -20,8 +20,6 @@ import PropTypes from 'prop-types';
  * @returns {React.ReactElement}
  */
 function ChartSessions({ data }) {
-    console.log('***************ChartSess_elem');
-    console.log(data);
     function CustomToolTip({ active, payload }) {
         if (active) {
             return (

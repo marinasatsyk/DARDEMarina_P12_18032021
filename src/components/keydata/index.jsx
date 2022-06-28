@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
  */
 
 function KeyData({ data }) {
-    console.log(data);
     /**
      * data key for building keyelem
      * @type {{calorieCount: number, proteinCount:number, carbohydrateCount:number, lipidCount:number}}
