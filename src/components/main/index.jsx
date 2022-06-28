@@ -28,8 +28,8 @@ function Main({ data }) {
     );
 }
 
-Main.propsTypes = {
-    dataMain: PropTypes.object.isRequired,
+Main.propTypes = {
+    data: PropTypes.object.isRequired,
 };
 
 export default Main;

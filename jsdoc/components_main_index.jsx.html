@@ -28,146 +28,37 @@
         <article>
             <pre class="prettyprint source linenums"><code>//@ts-check
 
-import ActivitieS from '../activities';
-import KeyData from '../keydata';
-import PerformanceUser from '../performance';
-import Score from '../score';
-import Sessions from '../sessions';
-import { Context } from '../../constants/DataContext';
-import { useContext, useEffect } from 'react';
-import { MockedDatabase as Database } from '../../constants/GetData';
-import { Redirect, useParams } from 'react-router';
 import PropTypes from 'prop-types';
 
 /**
  * build main page, call all datas and send it to components as data
  * @returns {React.ReactElement}
  */
-function Main() {
-    /**
-     * const id get the number user's Id for set it in data
-     * @const {number|string}
-     */
-    //@ts-ignore
-    const { id } = useParams();
-
-    const {
-        dataMain,
-        setDataMain,
-        dataActivity,
-        setDataActivity,
-        dataSessions,
-        setDataSessions,
-        dataPerformance,
-        setDataPerformance,
-        userId,
-        setUserId,
-        setLoading,
-        setError,
-    } = useContext(Context);
-
-    // ctx variable for save and pass the states while call data
-
-    const ctx = {
-        setDataMain,
-        setDataActivity,
-        setDataSessions,
-        setDataPerformance,
-        setUserId,
-        setLoading,
-        setError: (code) => {
-            console.log('error : ', code);
-        },
-    };
-    console.log('dataActivity FROM MAIN');
-    console.log(dataActivity);
-    // @ts-ignore
-    useEffect(() => {
-        setUserId(id);
-        async function loadData() {
-            console.log('async loadData');
-            setLoading(true);
-            await Database.getUser(id, ctx);
-            await Database.getActivity(id, ctx);
-            await Database.getSessions(id, ctx);
-            await Database.getPerformance(id, ctx);
-            setLoading(false);
-        }
-        loadData();
-    }, [id, setLoading]);
-
+function Main({ data }) {
     console.log('dataMain FROM MAIN');
-    console.log(dataMain);
-    console.log('dataMain FROM MAIN');
-    console.log(dataActivity);
+    console.log(data);
+
     return (
-        &lt;div className="info_block">
-            &lt;div className="greetings">
-                &lt;div className="wrap_greetings">
-                    &lt;h1 className="main_page">
-                        Bonjour
-                        {dataMain.hasOwnProperty('userInfos') ? (
-                            &lt;>
-                                &lt;span style={{ color: 'red' }}>
-                                    {` ${dataMain.userInfos.firstName}`}
-                                &lt;/span>
-                                &lt;br />
-                            &lt;/>
-                        ) : (
-                            ''
-                        )}
-                    &lt;/h1>
-                    &lt;div className="goal">
-                        Félicitation ! Vous avez explosé vos objectifs hier 👏
-                    &lt;/div>
-                &lt;/div>
-
-                &lt;div className="wrapper_charts">
-                    &lt;div className="charts">
-                        &lt;div className="wrap_activities">
-                            {dataActivity.hasOwnProperty('sessions') ? (
-                                &lt;ActivitieS data={dataActivity} />
-                            ) : (
-                                ''
-                            )}
-                        &lt;/div>
-                        &lt;div className="wrap_small_charts">
-                            &lt;div className="wrap_sessions">
-                                {dataSessions.hasOwnProperty('sessions') ? (
-                                    &lt;Sessions data={dataSessions} />
-                                ) : (
-                                    ''
-                                )}
-                            &lt;/div>
-                            &lt;div className="wrap_performance">
-                                {dataPerformance.hasOwnProperty('kind') ? (
-                                    &lt;PerformanceUser data={dataPerformance} />
-                                ) : (
-                                    ''
-                                )}
-                            &lt;/div>
-                            &lt;div className="wrap_score">
-                                {dataMain.hasOwnProperty('todayScore') ||
-                                dataMain.hasOwnProperty('score') ? (
-                                    &lt;Score data={dataMain} />
-                                ) : (
-                                    ''
-                                )}
-                            &lt;/div>
-                        &lt;/div>
-                    &lt;/div>
-                    &lt;div className="key_data">
-                        {dataMain.hasOwnProperty('keyData') ? (
-                            &lt;KeyData data={dataMain} />
-                        ) : (
-                            ''
-                        )}
-                    &lt;/div>
+        &lt;div className="greetings">
+            &lt;div className="wrap_greetings">
+                &lt;h1 className="main_page">
+                    Bonjour
+                    &lt;span style={{ color: 'red' }}>
+                        {` ${data.userInfos.firstName}`}
+                    &lt;/span>
+                    &lt;br />
+                &lt;/h1>
+                &lt;div className="goal">
+                    Félicitation ! Vous avez explosé vos objectifs hier 👏
                 &lt;/div>
             &lt;/div>
         &lt;/div>
     );
 }
+
+Main.propTypes = {
+    data: PropTypes.object.isRequired,
+};
 
 export default Main;
 </code></pre>
@@ -180,13 +71,13 @@ export default Main;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Database.html">Database</a></li><li><a href="MockedDatabase.html">MockedDatabase</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ActivitieS">ActivitieS</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#Aside">Aside</a></li><li><a href="global.html#ChartActivity">ChartActivity</a></li><li><a href="global.html#ChartPerformance">ChartPerformance</a></li><li><a href="global.html#ChartSessions">ChartSessions</a></li><li><a href="global.html#DataProvider">DataProvider</a></li><li><a href="global.html#Error">Error</a></li><li><a href="global.html#GetData">GetData</a></li><li><a href="global.html#GetMockedData">GetMockedData</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#KeyData">KeyData</a></li><li><a href="global.html#KeyElem">KeyElem</a></li><li><a href="global.html#Main">Main</a></li><li><a href="global.html#PerformanceUser">PerformanceUser</a></li><li><a href="global.html#Score">Score</a></li><li><a href="global.html#Sessions">Sessions</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Database.html">Database</a></li><li><a href="MockedDatabase.html">MockedDatabase</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ActivitieS">ActivitieS</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#Aside">Aside</a></li><li><a href="global.html#ChartActivity">ChartActivity</a></li><li><a href="global.html#ChartPerformance">ChartPerformance</a></li><li><a href="global.html#ChartSessions">ChartSessions</a></li><li><a href="global.html#DataProvider">DataProvider</a></li><li><a href="global.html#Error">Error</a></li><li><a href="global.html#GetData">GetData</a></li><li><a href="global.html#GetMockedData">GetMockedData</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#KeyData">KeyData</a></li><li><a href="global.html#KeyElem">KeyElem</a></li><li><a href="global.html#Main">Main</a></li><li><a href="global.html#PerformanceUser">PerformanceUser</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#Score">Score</a></li><li><a href="global.html#Sessions">Sessions</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Thu Jun 23 2022 15:20:16 GMT+0200 (heure d’été d’Europe centrale)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Fri Jun 24 2022 15:56:54 GMT+0200 (heure d’été d’Europe centrale)
 </footer>
 
 <script> prettyPrint(); </script>

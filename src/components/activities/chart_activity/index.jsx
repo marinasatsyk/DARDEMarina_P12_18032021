@@ -152,7 +152,7 @@ function ChartActivity({ data }) {
                 >
                     <CartesianGrid vertical={false} strokeDasharray="4 1" />
                     <XAxis
-                        dataKey="day"
+                        dataKey="day_d"
                         stroke="#9B9EAC"
                         tick={{
                             fontSize: '14px',

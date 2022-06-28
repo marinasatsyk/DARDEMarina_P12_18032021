@@ -32,3 +32,8 @@ Runs the app in the development mode.
 Open [http://localhost:3002](http://localhost:3002) to view it in your browser.
 
 The page will reload when you make changes.
+
+### 2.3 Documentation
+
+-   Install [JSDoc] (https://www.npmjs.com/package/jsdoc)
+-   For starting: `npm run jsdoc` , then open index.html from jsdoc folder with live-server.

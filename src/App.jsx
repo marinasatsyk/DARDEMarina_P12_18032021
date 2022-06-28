@@ -25,10 +25,6 @@ function App() {
                                 <Redirect to="/user/12" />
                             </Route>
 
-                            <Route path="/user/:id">
-                                <Profile />
-                            </Route>
-
                             <Route path="/user/:id/activity">
                                 <Profile isActivity={true} />
                             </Route>
@@ -47,6 +43,15 @@ function App() {
                             <Route path="/user/:id/key-data">
                                 <Profile isKeyData={true} />
                             </Route>
+
+                            <Route path="/user/:id/*">
+                                <Error />
+                            </Route>
+
+                            <Route path="/user/:id">
+                                <Profile showAll={true} />
+                            </Route>
+
                             <Route path="error/:error">
                                 <Error />
                             </Route>

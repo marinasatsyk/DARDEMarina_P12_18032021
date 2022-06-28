@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/profile/index.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/profile/index.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>//@ts-check
+
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import Error from '../../components/error';
+import { /*MockedDatabase as*/ Database } from '../../constants/GetData';
+import { Context } from '../../constants/DataContext';
+import Main from '../../components/main';
+import ActivitieS from '../../components/activities';
+import Sessions from '../../components/sessions';
+import PerformanceUser from '../../components/performance';
+import Score from '../../components/score';
+import KeyData from '../../components/keydata';
+import PropTypes from 'prop-types';
+/*
+dataMain - user main (userInfo)
+dataActivity -  barChart (activity)
+dataSessions - LineChart (averagesessions)
+dataPerformance - RadarChart(activitieS)
+todayScore - PieChart (dataMain)
+dataKey - main.key(dataMain)
+
+*/
+
+/**
+ * Main element for build the page of application and acces to routes
+ * @param {Object} props
+ * @returns {React.ReactElement}
+ */
+function Profile({
+    isKeyData,
+    isTodayScore,
+    isAverageSessions,
+    isActivity,
+    isActivities,
+}) {
+    console.log('isKeyData FROM PROFIL ');
+    console.log(isKeyData);
+
+    /**
+     * const id get the number user's Id for set it in data
+     * @const {number|string}
+     */
+    //@ts-ignore
+    const { id } = useParams();
+    console.log(id);
+    const {
+        dataMain,
+        setDataMain,
+        dataActivity,
+        setDataActivity,
+        dataSessions,
+        setDataSessions,
+        dataPerformance,
+        setDataPerformance,
+        userId,
+        setUserId,
+        loading,
+        setLoading,
+        error,
+        setError,
+    } = useContext(Context);
+
+    console.log(userId);
+    const ctx = {
+        setDataMain,
+        setDataActivity,
+        setDataSessions,
+        setDataPerformance,
+        setUserId,
+        setLoading,
+        setError: (code) => {
+            console.log('error : ', code);
+        },
+    };
+
+    useEffect(() => {
+        setUserId(id);
+        console.log(ctx);
+        async function loadData() {
+            console.log('async loadData');
+            setLoading(true);
+            await Database.getUser(id, ctx);
+            await Database.getActivity(id, ctx);
+            await Database.getSessions(id, ctx);
+            await Database.getPerformance(id, ctx);
+            setLoading(false);
+        }
+        loadData();
+    }, [id, setLoading]);
+
+    //to be able to access key figures via /user/:id/key-data route
+    isKeyData &amp;&amp; console.table(dataMain.keyData);
+
+    //to be able to access today's goal completion via the /user/:id/today-score route
+    isTodayScore &amp;&amp; console.table(dataMain.score);
+
+    //to be able to access average session duration via the /user/:id/average-sessions route
+    isAverageSessions &amp;&amp; console.table(dataSessions.sessions);
+
+    //to be able to access sessions via the /user/:id/activities route
+    isActivities &amp;&amp; console.table(dataPerformance);
+
+    //to be able to access sessions via the /user/:id/activity route
+    isActivity &amp;&amp; console.table(dataActivity.sessions);
+
+    console.log('PROFILE BLOCK');
+    console.log(isKeyData);
+    console.log(dataMain);
+    console.log(dataActivity);
+    console.log(dataSessions);
+    console.log(dataPerformance);
+    if (error) {
+        return &lt;Error />;
+    } else if (loading) {
+        return &lt;div className="loading">Loading...&lt;/div>;
+    } else {
+        return (
+            &lt;div className="info_block">
+                {dataMain.hasOwnProperty('userInfos') ? (
+                    &lt;Main data={dataMain} />
+                ) : (
+                    ''
+                )}
+
+                &lt;div className="wrapper_charts">
+                    &lt;div className="charts">
+                        &lt;div className="wrap_activities">
+                            {dataActivity.hasOwnProperty('sessions') ? (
+                                &lt;ActivitieS data={dataActivity} />
+                            ) : (
+                                ''
+                            )}
+                        &lt;/div>
+                        &lt;div className="wrap_small_charts">
+                            &lt;div className="wrap_sessions">
+                                {dataSessions.hasOwnProperty('sessions') ? (
+                                    &lt;Sessions data={dataSessions} />
+                                ) : (
+                                    ''
+                                )}
+                            &lt;/div>
+                            &lt;div className="wrap_performance">
+                                {dataPerformance.hasOwnProperty('kind') ? (
+                                    &lt;PerformanceUser data={dataPerformance} />
+                                ) : (
+                                    ''
+                                )}
+                            &lt;/div>
+                            &lt;div className="wrap_score">
+                                {dataMain.hasOwnProperty('todayScore') ||
+                                dataMain.hasOwnProperty('score') ? (
+                                    &lt;Score data={dataMain} />
+                                ) : (
+                                    ''
+                                )}
+                            &lt;/div>
+                        &lt;/div>
+                    &lt;/div>
+                    &lt;div className="key_data">
+                        {dataMain.hasOwnProperty('keyData') ? (
+                            &lt;KeyData data={dataMain} />
+                        ) : (
+                            ''
+                        )}
+                    &lt;/div>
+                &lt;/div>
+            &lt;/div>
+        );
+    }
+}
+
+export default Profile;
+
+Profile.propTypes = {
+    isKeyData: PropTypes.bool,
+    isTodayScore: PropTypes.bool,
+    isAverageSessions: PropTypes.bool,
+    isActivity: PropTypes.bool,
+    isActivities: PropTypes.bool,
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Database.html">Database</a></li><li><a href="MockedDatabase.html">MockedDatabase</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ActivitieS">ActivitieS</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#Aside">Aside</a></li><li><a href="global.html#ChartActivity">ChartActivity</a></li><li><a href="global.html#ChartPerformance">ChartPerformance</a></li><li><a href="global.html#ChartSessions">ChartSessions</a></li><li><a href="global.html#DataProvider">DataProvider</a></li><li><a href="global.html#Error">Error</a></li><li><a href="global.html#GetData">GetData</a></li><li><a href="global.html#GetMockedData">GetMockedData</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#KeyData">KeyData</a></li><li><a href="global.html#KeyElem">KeyElem</a></li><li><a href="global.html#Main">Main</a></li><li><a href="global.html#PerformanceUser">PerformanceUser</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#Score">Score</a></li><li><a href="global.html#Sessions">Sessions</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Fri Jun 24 2022 15:56:54 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

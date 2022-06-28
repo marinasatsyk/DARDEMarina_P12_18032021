@@ -22,11 +22,9 @@ function ActivitieS({ data }) {
     //     //     return index;
     //     // }
     // });
-    console.log('<<<<<<<<<<<<<<<<sessionsData_var>>>>>>>>>>>');
-    console.log(sessionsData_var);
 
-    const sessionsData = sessionsData_var.map((item, index) => {
-        item.day = index + 1;
+    sessionsData_var.map((item, index) => {
+        item.day_d = index + 1;
         return item;
     });
 
@@ -35,7 +33,7 @@ function ActivitieS({ data }) {
     //  sessionsData = [...data.sessions]
 
     console.log('============AFTER chage sessionsData');
-    console.log(sessionsData);
+    // console.log(sessionsData);
 
     return (
         <>
@@ -44,11 +42,13 @@ function ActivitieS({ data }) {
                 style={{
                     maxWidth: 835,
                     maxHeight: 320,
+                    minWidth: 835,
+                    minHeight: 320,
                     background: '#FBFBFB',
                     borderRadius: '5px',
                 }}
             >
-                <ChartActivity data={sessionsData} />
+                <ChartActivity data={data.sessions} />
             </div>
         </>
     );

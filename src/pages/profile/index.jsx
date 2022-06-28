@@ -21,13 +21,29 @@ todayScore - PieChart (dataMain)
 dataKey - main.key(dataMain)
 
 */
+
+/**
+ * Main element for build the page of application and acces to routes
+ * @param {Object} props
+ * @returns {React.ReactElement}
+ */
 function Profile({
     isKeyData,
     isTodayScore,
     isAverageSessions,
     isActivity,
     isActivities,
+    showAll,
 }) {
+    console.log('isKeyData FROM PROFIL ');
+    console.log(
+        isKeyData,
+        isTodayScore,
+        isAverageSessions,
+        isActivity,
+        isActivities
+    );
+
     /**
      * const id get the number user's Id for set it in data
      * @const {number|string}
@@ -54,11 +70,17 @@ function Profile({
 
     console.log(userId);
     const ctx = {
+        dataMain,
         setDataMain,
+        dataActivity,
         setDataActivity,
+        dataSessions,
         setDataSessions,
+        dataPerformance,
         setDataPerformance,
+        userId,
         setUserId,
+        loading,
         setLoading,
         setError: (code) => {
             console.log('error : ', code);
@@ -78,34 +100,32 @@ function Profile({
             setLoading(false);
         }
         loadData();
-    }, [id, setLoading]);
+    }, [id]);
 
-    //to be able to access key figures via /user/:id/key-data route
+    // //to be able to access key figures via /user/:id/key-data route
     // isKeyData && console.table(dataMain.keyData);
-    isKeyData && console.table(dataMain.userInfos);
 
-    //to be able to access today's goal completion via the /user/:id/today-score route
+    // //to be able to access today's goal completion via the /user/:id/today-score route
     // isTodayScore && console.table(dataMain.score);
-    isTodayScore && console.table(dataMain.score);
 
-    //to be able to access average session duration via the /user/:id/average-sessions route
+    // //to be able to access average session duration via the /user/:id/average-sessions route
     // isAverageSessions && console.table(dataSessions.sessions);
-    isAverageSessions && console.table(dataSessions.sessions);
 
-    //to be able to access sessions via the /user/:id/activities route
+    // //to be able to access sessions via the /user/:id/activities route
     // isActivities && console.table(dataPerformance);
-    isActivities && console.table(dataPerformance);
 
-    //to be able to access sessions via the /user/:id/activity route
+    // //to be able to access sessions via the /user/:id/activity route
     // isActivity && console.table(dataActivity.sessions);
-    isActivity && console.table(dataActivity.sessions);
 
-    console.log('PROFILE BLOCK');
-    console.log(isKeyData);
-    console.log(dataMain);
-    console.log(dataActivity);
-    console.log(dataSessions);
-    console.log(dataPerformance);
+    // console.log('PROFILE BLOCK');
+    console.log(
+        'setDataMain :' + isKeyData,
+        'isTodayScore: ' + isTodayScore,
+        'isAverageSessions: ' + isAverageSessions,
+        'isActivity: ' + isActivity,
+        'isActivities: ' + isActivities
+    );
+
     if (error) {
         return <Error />;
     } else if (loading) {
@@ -121,45 +141,64 @@ function Profile({
 
                 <div className="wrapper_charts">
                     <div className="charts">
-                        <div className="wrap_activities">
-                            {dataActivity.hasOwnProperty('sessions') ? (
+                        {/* Activity */}
+                        {dataActivity.hasOwnProperty('sessions') &&
+                        (isActivity || showAll) ? (
+                            <div className="wrap_activities">
                                 <ActivitieS data={dataActivity} />
-                            ) : (
-                                ''
-                            )}
-                        </div>
-                        <div className="wrap_small_charts">
-                            <div className="wrap_sessions">
-                                {dataSessions.hasOwnProperty('sessions') ? (
-                                    <Sessions data={dataSessions} />
+                            </div>
+                        ) : (
+                            ''
+                        )}
+
+                        {showAll ||
+                        isAverageSessions ||
+                        isActivities ||
+                        isTodayScore ? (
+                            <div className="wrap_small_charts">
+                                {dataSessions.hasOwnProperty('sessions') &&
+                                (isAverageSessions || showAll) ? (
+                                    <div className="wrap_sessions">
+                                        <Sessions data={dataSessions} />
+                                    </div>
+                                ) : (
+                                    ''
+                                )}
+
+                                {dataPerformance.hasOwnProperty('kind') &&
+                                (isActivities || showAll) ? (
+                                    <div className="wrap_performance">
+                                        <PerformanceUser
+                                            data={dataPerformance}
+                                        />
+                                    </div>
+                                ) : (
+                                    ''
+                                )}
+
+                                {(dataMain.hasOwnProperty('todayScore') ||
+                                    dataMain.hasOwnProperty('score')) &&
+                                (isTodayScore || showAll) ? (
+                                    <div className="wrap_score">
+                                        <Score data={dataMain} />
+                                    </div>
                                 ) : (
                                     ''
                                 )}
                             </div>
-                            <div className="wrap_performance">
-                                {dataPerformance.hasOwnProperty('kind') ? (
-                                    <PerformanceUser data={dataPerformance} />
-                                ) : (
-                                    ''
-                                )}
-                            </div>
-                            <div className="wrap_score">
-                                {dataMain.hasOwnProperty('todayScore') ||
-                                dataMain.hasOwnProperty('score') ? (
-                                    <Score data={dataMain} />
-                                ) : (
-                                    ''
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="key_data">
-                        {dataMain.hasOwnProperty('keyData') ? (
-                            <KeyData data={dataMain} />
                         ) : (
                             ''
                         )}
                     </div>
+
+                    {dataMain.hasOwnProperty('keyData') &&
+                    (isKeyData || showAll) ? (
+                        <div className="key_data">
+                            <KeyData data={dataMain} />
+                        </div>
+                    ) : (
+                        ''
+                    )}
                 </div>
             </div>
         );
@@ -174,4 +213,5 @@ Profile.propTypes = {
     isAverageSessions: PropTypes.bool,
     isActivity: PropTypes.bool,
     isActivities: PropTypes.bool,
+    showAll: PropTypes.bool,
 };
